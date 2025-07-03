@@ -31,7 +31,6 @@ const HeroSection = () => {
           </div>
 
           {/* Sağ Taraf - Görsel */}
-
           <div className="w-full md:w-1/2 lg:w-3/5 h-80 md:h-full mt-8 md:mt-0">
             <img
               src="/hero.png"

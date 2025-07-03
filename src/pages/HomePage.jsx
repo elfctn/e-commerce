@@ -1,20 +1,22 @@
 import React from "react";
+import HeroSection from "../components/home/HeroSection";
+import BrandLogos from "../components/home/BrandLogos";
+import FeaturedProducts from "../components/home/FeaturedProducts";
+import BestsellerProducts from "../components/home/BestsellerProducts";
+import WeLoveWhatWeDo from "../components/home/WeLoveWhatWeDo";
+import Services from "../components/home/Services";
+import FeaturedPosts from "../components/home/FeaturedPosts";
 
 const HomePage = () => {
   return (
     <div>
-      {/* bu bölümleriplanladım adım adım oluşturacağım */}
-      {/* <HeroSection /> */}
-      {/* <FeaturedProducts /> */}
-      {/* <BestsellerProducts /> */}
-      {/* <Services /> */}
-      {/* <FeaturedPosts /> */}
-      <div className="py-20 text-center">
-        <h2 className="text-4xl font-bold text-slate-800">Ana Sayfa</h2>
-        <p className="text-slate-600 mt-4">
-          Bu sayfanın içeriği yakında daha küçük component'lerle doldurulacak.
-        </p>
-      </div>
+      <HeroSection />
+      <BrandLogos className="py-12 bg-white" />
+      <FeaturedProducts />
+      <BestsellerProducts />
+      <WeLoveWhatWeDo />
+      <Services />
+      <FeaturedPosts />
     </div>
   );
 };
