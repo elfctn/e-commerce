@@ -1,8 +1,11 @@
+// src/App.jsx
+
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HomePage from "./pages/HomePage";
+import ShopPage from "./pages/ShopPage";
 
 function App() {
   return (
@@ -14,11 +17,9 @@ function App() {
             <HomePage />
           </Route>
 
-          {/* Diğer sayfaların rotaları buraya eekleyecegim */}
-          {/* <Route path="/shop">
+          <Route path="/shop">
             <ShopPage />
-          </Route> 
-          */}
+          </Route>
         </Switch>
       </main>
       <Footer />
