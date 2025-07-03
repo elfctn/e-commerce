@@ -4,7 +4,7 @@ const WeLoveWhatWeDo = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-8">
           {/* Sol Taraf - Resimler */}
           <div className="w-full md:w-1/2">
             <div className="flex gap-4 justify-center">

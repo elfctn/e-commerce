@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "../ProductCard";
 
-// 10 ürün içeren yeni mock data listesi
+//mock data
 const mockProducts = [
   {
     id: 1,

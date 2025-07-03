@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"; // Geçici olarak
 
-// Footer linklerini yönetmek için bir veri yapısıS
 const footerLinkSections = [
   {
     title: "Company Info",

@@ -11,7 +11,7 @@ const categories = [
 
 const ShopCategoryCards = () => {
   return (
-    <div className="container mx-auto flex flex-wrap justify-center gap-4 mb-12">
+    <div className="container mx-auto grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center mb-12">
       {categories.map((category, index) => (
         <Link
           key={index}
@@ -21,7 +21,7 @@ const ShopCategoryCards = () => {
           <img
             src={category.imageUrl}
             alt={category.name}
-            className="w-auto h-auto object-cover cursor-pointer transition-transform duration-300 group-hover:scale-110"
+            className="w-[205px] h-[205px] object-cover cursor-pointer transition-transform duration-300 group-hover:scale-110"
           />
         </Link>
       ))}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-// DÜZELTME: Eksik ikonlar import listesine eklendi
 import {
   ShoppingCart,
   User,

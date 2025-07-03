@@ -5,23 +5,19 @@ const ProductCard = ({ product }) => {
   if (!product) {
     return null;
   }
-
-  // Renk seçenekleri için bir dizi
   const colors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
 
   return (
     <Link to={`/product/${product.id}`} className="group block">
       <div className="flex flex-col text-center">
-        {/* Resim Alanı */}
-        <div className="mb-4 relative overflow-hidden">
+        <div className="mb-4 relative overflow-hidden flex justify-center items-center">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-[239px] h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
           />
         </div>
 
-        {/* Metin İçeriği */}
         <h4 className="text-base font-bold text-[#252B42] mb-2">
           {product.name}
         </h4>
@@ -29,7 +25,6 @@ const ProductCard = ({ product }) => {
           {product.category}
         </p>
 
-        {/* Fiyat Alanı - Orijinal stile göre düzeltildi */}
         <div className="flex justify-center items-center gap-2">
           <span className="text-base font-bold text-[#BDBDBD] line-through">
             ${product.originalPrice.toFixed(2)}
@@ -39,7 +34,6 @@ const ProductCard = ({ product }) => {
           </span>
         </div>
 
-        {/* Renkler Alanı - Yeni eklendi */}
         <div className="flex justify-center mt-2 space-x-1.5">
           {colors.map((color) => (
             <span

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    // Bu dış sarmalayıcı, bölümün üstten ve alttan boşluğunu ayarlar.
     <section className="py-12 px-4">
       <div className="container mx-auto">
         {/* Ana Hero Kartı */}
@@ -15,7 +14,7 @@ const HeroSection = () => {
         >
           {/* Sol Taraf - Metin İçeriği */}
           <div className="w-full md:w-1/2 lg:w-2/5 p-8 md:p-12 lg:pl-20 z-10 text-center md:text-left">
-            <h5 className="font-bold text-[#2A7CC7]">SUMMER 2020</h5>
+            <h5 className="font-bold text-[#2A7CC7]"> ELIFCETIN 2025</h5>
             <h1 className="text-4xl md:text-6xl font-bold my-6 text-[#252B42]">
               NEW COLLECTION
             </h1>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Orijinal  verilerle mock data oluşturalım
+//mock data
 const postsData = [
   {
     id: 1,
@@ -40,13 +40,14 @@ const FeaturedPosts = () => {
           {postsData.map((post) => (
             <div
               key={post.id}
-              className="bg-white max-w-[700px] w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col md:flex-row"
+              className="bg-white w-[328px] h-[606px] md:max-w-[700px] md:w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col md:flex-row"
             >
-              <div className="relative md:w-2/5">
+              {/* Görsel Alanı */}
+              <div className="relative w-full h-[250px] md:w-2/5 md:h-auto">
                 <img
                   src={post.imageUrl}
                   alt={post.title}
-                  className="w-full h-full object-cover min-h-[300px]"
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute top-5 left-5">
                   <span className="bg-[#E74040] text-white text-xs font-bold px-3 py-1 rounded">
@@ -55,7 +56,8 @@ const FeaturedPosts = () => {
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col md:w-3/5">
+              {/* İçerik Alanı */}
+              <div className="p-6 flex flex-col md:w-3/5 flex-1 overflow-hidden">
                 <span className="text-sm text-[#23A6F0] font-bold">
                   {post.category}
                 </span>
@@ -94,7 +96,6 @@ const FeaturedPosts = () => {
                   <div className="w-4 h-4 rounded-full bg-[#252B42]"></div>
                 </div>
 
-                {/* EKLENEN BÖLÜM */}
                 <div className="flex flex-wrap items-center text-xs text-[#737373] mb-4 gap-2">
                   <div className="flex items-center mr-2">
                     <img
@@ -121,7 +122,6 @@ const FeaturedPosts = () => {
                     <span>Progress</span>
                   </div>
                 </div>
-                {/* EKLENEN BÖLÜM SONU */}
 
                 <div className="mt-auto">
                   <Link
