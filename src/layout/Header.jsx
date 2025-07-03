@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { ShoppingCart, User, Search, Menu, X } from "lucide-react";
+// DÜZELTME: Eksik ikonlar import listesine eklendi
+import {
+  ShoppingCart,
+  User,
+  Search,
+  Menu,
+  X,
+  Instagram,
+  Youtube,
+  Facebook,
+  Twitter,
+} from "lucide-react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,15 +30,29 @@ const Header = () => {
       {/* Üst Bar (Masaüstü) */}
       <div className="hidden md:flex justify-between items-center bg-[#252B42] text-white px-8 py-2 text-sm">
         <div className="flex items-center gap-4">
-          <span>(225) 555-0118</span>
-          <span>michelle.rivera@example.com</span>
+          <span>+90 (530) 478-0487</span>
+          <span>elifcetin.dev@gmail.com</span>
         </div>
         <div>
           <span>Follow Us and get a chance to win 80% off</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span>Follow Us :</span>
-          {/* Sosyal medya ikonları buraya eklenebilir */}
+
+        <div className="flex items-center space-x-4">
+          <span className="font-bold">Follow Us :</span>
+          <div className="flex items-center space-x-3">
+            <a href="#" className="hover:text-sky-400 transition-colors">
+              <Instagram size={16} />
+            </a>
+            <a href="#" className="hover:text-sky-400 transition-colors">
+              <Youtube size={16} />
+            </a>
+            <a href="#" className="hover:text-sky-400 transition-colors">
+              <Facebook size={16} />
+            </a>
+            <a href="#" className="hover:text-sky-400 transition-colors">
+              <Twitter size={16} />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -36,7 +61,7 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-[#252B42]">
-            Bandage
+            ELFCTN
           </Link>
 
           {/* Navigasyon Linkleri (Masaüstü) */}
@@ -68,7 +93,7 @@ const Header = () => {
               className="flex items-center gap-1 hover:text-blue-700"
             >
               <ShoppingCart size={20} />
-              <span>1</span>
+              <span></span>
             </Link>
           </div>
 

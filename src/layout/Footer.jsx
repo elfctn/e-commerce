@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"; // Geçici olarak
 
-// Footer linklerini yönetmek için bir veri yapısı
+// Footer linklerini yönetmek için bir veri yapısıS
 const footerLinkSections = [
   {
     title: "Company Info",
@@ -16,7 +16,7 @@ const footerLinkSections = [
   {
     title: "Legal",
     links: [
-      { text: "About Us", path: "/about" }, // Bu linkler Figma tasarımına göre düzeltilecek
+      { text: "About Us", path: "/about" },
       { text: "Carrier", path: "/careers" },
       { text: "We are hiring", path: "/hiring" },
       { text: "Blog", path: "/blog" },
@@ -48,7 +48,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         {/* Logo ve Sosyal Medya */}
         <div className="flex justify-between items-center mb-12 border-b border-gray-300 pb-6">
-          <h2 className="text-2xl font-bold">Bandage</h2>
+          <h2 className="text-2xl font-bold">ELFCTN</h2>
           <div className="flex space-x-4">
             <a
               href="https://facebook.com"
@@ -119,7 +119,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="text-center text-[#737373] pt-6">
-          <p>Made With Love By Finland All Right Reserved</p>
+          <p>Made With Love By @elfctn All Right Reserved</p>
         </div>
       </div>
     </footer>
