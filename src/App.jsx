@@ -4,6 +4,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
 
           <Route path="/shop">
             <ShopPage />
+          </Route>
+
+          <Route path="/product/:id">
+            <ProductDetailPage />
           </Route>
         </Switch>
       </main>
