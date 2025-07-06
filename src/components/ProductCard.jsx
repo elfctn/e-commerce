@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  if (!product) {
-    return null;
-  }
   const colors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
 
   return (

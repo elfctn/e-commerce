@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Popover, Transition } from "@headlessui/react";
 import {
   ShoppingCart,
   User,
@@ -12,33 +13,33 @@ import {
   Twitter,
   ChevronDown,
 } from "lucide-react";
-import { Popover, Transition } from "@headlessui/react";
+import DesktopDropdown from "../layout/DesktopDropdown";
+import MobileDropdown from "../layout/MobileDropdown";
+
+const navItems = [
+  { text: "Home", path: "/" },
+  { text: "Shop", path: "/shop" },
+  { text: "About", path: "/about" },
+  { text: "Team", path: "/team" },
+  { text: "Contact", path: "/contact" },
+  {
+    text: "Other",
+    children: [
+      { text: "Blog", path: "/blog" },
+      { text: "Stats", path: "/stats" },
+      { text: "Testimonials", path: "/testimonials" },
+      { text: "Pricing", path: "/pricing" },
+    ],
+  },
+];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // linkleri ana ve açılır menü olarak ayırıyoruz
-  const mainNavLinks = [
-    { text: "Home", path: "/" },
-    { text: "Shop", path: "/shop" },
-    { text: "About", path: "/about" },
-    { text: "Team", path: "/team" },
-    { text: "Contact", path: "/contact" },
-  ];
-
-  const dropdownLinks = [
-    { text: "Blog", path: "/blog" },
-    { text: "Stats", path: "/stats" },
-    { text: "Testimonials", path: "/testimonials" },
-    { text: "Pricing", path: "/pricing" },
-  ];
-
-  // mobil menü için tüm linkleri birleştirdim
-  const allNavLinks = [...mainNavLinks, ...dropdownLinks];
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <header className="shadow-md sticky top-0 bg-white z-50">
-      {/* Üst Bar (Masaüstü) */}
+      {/* Üst Bar */}
       <div className="hidden md:flex justify-between items-center bg-[#252B42] text-white px-8 py-2 text-sm">
         <div className="flex items-center gap-4">
           <span>+90 (530) 478-0487</span>
@@ -59,7 +60,7 @@ const Header = () => {
               <Instagram size={16} />
             </a>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-sky-400 transition-colors"
@@ -86,73 +87,35 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Ana Header */}
+      {/* BAŞLIK */}
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="text-2xl font-bold text-[#252B42]">
             ELFCTN
           </Link>
 
-          {/* navlink (Masaüstü)*/}
+          {/* MASAÜSTÜ MENÜ */}
           <nav className="hidden md:flex items-center space-x-6 text-[#737373] font-medium">
-            {mainNavLinks.map((link) => (
-              <NavLink
-                key={link.text}
-                to={link.path}
-                className="hover:text-[#252B42]"
-                activeClassName="text-[#252B42]"
-                exact={link.path === "/"}
-              >
-                {link.text}
-              </NavLink>
-            ))}
-
-            {/* açılır meenü ekledim */}
-            <Popover className="relative">
-              {({ open }) => (
-                <>
-                  <Popover.Button className="flex items-center focus:outline-none hover:text-[#252B42]">
-                    <span>Other</span>
-                    <ChevronDown
-                      size={16}
-                      className={`ml-1 transition-transform ${
-                        open ? "rotate-180" : ""
-                      }`}
-                    />
-                  </Popover.Button>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-200"
-                    enterFrom="opacity-0 translate-y-1"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 translate-y-1"
-                  >
-                    <Popover.Panel className="absolute z-10 w-32 mt-3 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                      <div className="py-1">
-                        {dropdownLinks.map((link) => (
-                          <NavLink
-                            key={link.text}
-                            to={link.path}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            activeClassName="bg-gray-100 font-bold"
-                          >
-                            {link.text}
-                          </NavLink>
-                        ))}
-                      </div>
-                    </Popover.Panel>
-                  </Transition>
-                </>
-              )}
-            </Popover>
+            {navItems.map((item) =>
+              item.children ? (
+                <DesktopDropdown key={item.text} item={item} />
+              ) : (
+                <NavLink
+                  key={item.text}
+                  to={item.path}
+                  className="hover:text-[#252B42]"
+                  activeClassName="text-[#252B42]"
+                  exact={item.path === "/"}
+                >
+                  {item.text}
+                </NavLink>
+              )
+            )}
           </nav>
 
-          {/* Sağ Taraftaki İkonlar */}
           <div className="hidden md:flex items-center space-x-6 text-[#23A6F0]">
             <Link to="/login" className="flex items-center gap-1">
-              <User size={20} />
+              <User size={20} />{" "}
               <span className="font-bold">Login / Register</span>
             </Link>
             <button className="hover:text-blue-700">
@@ -167,7 +130,6 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Mobil Menü Butonu */}
           <div className="md:hidden">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -176,24 +138,32 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobil Menü */}
+      {/* MOBİL MENÜ */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white py-4 px-6 space-y-4">
-          <nav className="flex flex-col space-y-4 text-center text-lg text-[#737373]">
-            {allNavLinks.map((link) => (
-              <NavLink
-                key={link.text}
-                to={link.path}
-                className="hover:text-[#252B42]"
-                activeClassName="text-[#252B42]"
-                exact={link.path === "/"}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.text}
-              </NavLink>
-            ))}
+        <div className="md:hidden bg-white py-4 px-6">
+          <nav className="flex flex-col text-center">
+            {navItems.map((item) =>
+              item.children ? (
+                <MobileDropdown
+                  key={item.text}
+                  item={item}
+                  closeMenu={closeMobileMenu}
+                />
+              ) : (
+                <NavLink
+                  key={item.text}
+                  to={item.path}
+                  className="py-3 text-lg text-[#737373] hover:text-[#252B42] border-b border-gray-100"
+                  activeClassName="text-[#252B42] font-bold"
+                  exact={item.path === "/"}
+                  onClick={closeMobileMenu}
+                >
+                  {item.text}
+                </NavLink>
+              )
+            )}
           </nav>
-          <div className="border-t pt-4 flex flex-col items-center space-y-4 text-[#23A6F0]">
+          <div className="border-t pt-4 mt-4 flex flex-col items-center space-y-4 text-[#23A6F0]">
             <Link to="/login" className="flex items-center gap-2 text-xl">
               <User size={24} />
               <span className="font-bold">Login / Register</span>

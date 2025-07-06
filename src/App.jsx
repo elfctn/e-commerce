@@ -8,8 +8,9 @@ import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import PricingPage from "./pages/PricingPage";
 import BlogPage from "./pages/BlogPage";
-import BlogDetailPage from "./pages/BlogDetailPage.jsx";
+import BlogDetailPage from "./pages/BlogDetailPage";
 import StatsPage from "./pages/StatsPage";
+import TestimonialsPage from "./pages/TestimonialsPage";
 
 function App() {
   return (
@@ -20,37 +21,32 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-
           <Route path="/shop">
             <ShopPage />
           </Route>
-
           <Route path="/product/:id">
             <ProductDetailPage />
           </Route>
-
           <Route path="/contact">
             <ContactPage />
           </Route>
-
           <Route path="/team">
             <TeamPage />
           </Route>
-
           <Route path="/pricing">
             <PricingPage />
           </Route>
-
           <Route exact path="/blog">
             <BlogPage />
           </Route>
-
           <Route path="/blog/:id">
             <BlogDetailPage />
           </Route>
-
           <Route path="/stats">
             <StatsPage />
+          </Route>
+          <Route path="/testimonials">
+            <TestimonialsPage />
           </Route>
         </Switch>
       </main>
