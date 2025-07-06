@@ -6,12 +6,15 @@ export const products = [
     description:
       "Jacket designed for rainy days. Complete your style with high-quality fabric and modern design.",
     images: ["/urun1.png"],
+    originalPrice: 1399.0,
+    discount: 20,
     category: "Men's Clothing",
     rating: 4,
     stock: 10,
     reviews: 10,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun1.png",
   },
   {
     id: 2,
@@ -26,6 +29,9 @@ export const products = [
     reviews: 24,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun2.png",
+    originalPrice: 369.99,
+    discount: 20,
   },
   {
     id: 3,
@@ -40,6 +46,9 @@ export const products = [
     reviews: 18,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun3.png",
+    originalPrice: 419.0,
+    discount: 20,
   },
   {
     id: 4,
@@ -47,13 +56,16 @@ export const products = [
     price: 1299.0,
     description:
       "A cotton, short-sleeve shirt. Its style and colors will suit you perfectly in the summer months.",
-    images: ["/urun4.jpg"],
+    images: ["/urun4.png"],
     category: "Men's Clothing",
     rating: 5,
     stock: 5,
     reviews: 32,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun4.png",
+    originalPrice: 1599.0,
+    discount: 20,
   },
   {
     id: 5,
@@ -96,6 +108,9 @@ export const products = [
     reviews: 56,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun7.png",
+    originalPrice: 309.99,
+    discount: 20,
   },
   {
     id: 8,
@@ -109,6 +124,9 @@ export const products = [
     reviews: 28,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun8.png",
+    originalPrice: 479.0,
+    discount: 20,
   },
   {
     id: 9,
@@ -123,6 +141,9 @@ export const products = [
     reviews: 22,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun9.png",
+    originalPrice: 1099.99,
+    discount: 20,
   },
   {
     id: 10,
@@ -137,6 +158,9 @@ export const products = [
     reviews: 19,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun10.png",
+    originalPrice: 179.5,
+    discount: 20,
   },
   {
     id: 11,
@@ -151,6 +175,9 @@ export const products = [
     reviews: 37,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun11.png",
+    originalPrice: 219.0,
+    discount: 20,
   },
   {
     id: 12,
@@ -165,5 +192,8 @@ export const products = [
     reviews: 31,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun12.png",
+    originalPrice: 139.99,
+    discount: 20,
   },
 ];
