@@ -1,3 +1,4 @@
+import React from "react";
 import BrandLogos from "../common/BrandLogos";
 
 const TrustedBySection = () => {
