@@ -1,11 +1,13 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "../../data/blog";
+import { teamMembers } from "../../data/team";
 
-const BlogSidebar = () => {
-  // Son 3 yazıyı "Recent Posts" için alalım
+const BlogSidebar = ({ authorName }) => {
+  // o anki yazının yazarını takım listesinde bul
+  const author = teamMembers.find((member) => member.name === authorName);
+
   const recentPosts = blogPosts.slice(0, 3);
-
-  // kategorileri dinamik olarak oluşturalım (şimdilik statik)
   const categories = [
     { name: "Editor's Pick", count: 5 },
     { name: "Music", count: 8 },
@@ -15,8 +17,22 @@ const BlogSidebar = () => {
 
   return (
     <aside className="space-y-8">
+      {/* Yazar Bölümü */}
+      {author && (
+        <div className="p-6 bg-white rounded-lg shadow-sm text-center">
+          <h3 className="text-xl font-bold mb-4">About The Author</h3>
+          <img
+            src={author.imageUrl}
+            alt={author.name}
+            className="w-24 h-24 rounded-full object-cover mx-auto mb-4"
+          />
+          <h4 className="font-bold text-lg">{author.name}</h4>
+          <p className="text-sm text-gray-500">{author.title}</p>
+        </div>
+      )}
+
       {/* Son Yazılar Bölümü */}
-      <div>
+      <div className="p-6 bg-white rounded-lg shadow-sm">
         <h3 className="text-xl font-bold mb-4">Recent Posts</h3>
         <div className="space-y-4">
           {recentPosts.map((post) => (
@@ -42,7 +58,7 @@ const BlogSidebar = () => {
       </div>
 
       {/* Kategoriler Bölümü */}
-      <div>
+      <div className="p-6 bg-white rounded-lg shadow-sm">
         <h3 className="text-xl font-bold mb-4">Categories</h3>
         <ul className="space-y-3">
           {categories.map((category) => (

@@ -20,10 +20,12 @@ const BlogDetailContent = ({ post }) => {
         className="w-full h-auto object-cover rounded-lg mb-6"
       />
 
-      <div
-        className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      {/* DÜZELTME VAR!!!! dangerouslySetInnerHTML yerine bu güvenli yapıyı kullanacağım */}
+      <div className="text-gray-600 space-y-4">
+        {post.content.split("\n").map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </div>
 
       <div className="mt-8 pt-6 border-t flex flex-wrap items-center justify-between">
         <div className="flex flex-wrap gap-2">

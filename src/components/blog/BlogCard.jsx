@@ -15,17 +15,9 @@ const BlogCard = ({ post }) => {
         </div>
       </div>
       <div className="p-6">
-        <div className="flex space-x-4 text-xs text-gray-500 mb-2">
-          <a href="#" className="hover:text-blue-500">
-            Google
-          </a>
-          <a href="#" className="hover:text-blue-500">
-            Trending
-          </a>
-          <a href="#" className="hover:text-blue-500">
-            New
-          </a>
-        </div>
+        <p className="text-sm text-gray-500 mb-2">
+          <span className="font-bold">Author:</span> {post.author}
+        </p>
         <h4 className="text-xl font-bold text-gray-800 mb-2 h-16">
           {post.title}
         </h4>

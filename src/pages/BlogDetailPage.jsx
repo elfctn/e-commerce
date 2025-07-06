@@ -24,14 +24,11 @@ const BlogDetailPage = () => {
     <div className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-12">
-          {/* Sol Sütun - Ana İçerik */}
           <div className="w-full lg:w-2/3">
             <BlogDetailContent post={post} />
           </div>
-
-          {/* Sağ Sütun - Kenar Çubuğu (Sidebar) */}
           <div className="w-full lg:w-1/3">
-            <BlogSidebar />
+            <BlogSidebar authorName={post.author} />
           </div>
         </div>
       </div>
