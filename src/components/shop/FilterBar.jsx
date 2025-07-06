@@ -1,13 +1,14 @@
 import React from "react";
+import { products } from "../../data/products.js";
 
 const FilterBar = () => {
   return (
-    <div className="bg-white py-8">
+    <div className="bg-[#FAFAFA] py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
           <div className="md:mb-0">
             <p className="text-sm font-bold text-[#737373]">
-              Showing all 12 results
+              Showing all {products.length} results
             </p>
           </div>
 
