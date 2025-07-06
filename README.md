@@ -8,7 +8,9 @@ This project is a modern, responsive e-commerce front-end application built from
 
 This project is developed using Agile methodologies. Task management and workflow are organized on a Kanban board to ensure continuous delivery and iterative development. Each feature or fix is tracked as a separate task, moving through stages like 'To Do', 'In Progress', and 'Done'.
 
-## NOTE: The project is a total of 4 iterations and 24 sprints as Fullstack. The first 3 iterations of the 4 iterations are planned as frontend development and the last iteration is planned as backend development.
+## NOTE
+
+The project is a total of 4 iterations and 24 sprints as Fullstack. The first 3 iterations of the 4 iterations are planned as frontend development and the last iteration is planned as backend development.
 
 ---
 
