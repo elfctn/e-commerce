@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   ShoppingCart,
@@ -10,19 +10,31 @@ import {
   Youtube,
   Facebook,
   Twitter,
+  ChevronDown,
 } from "lucide-react";
+import { Popover, Transition } from "@headlessui/react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = [
+  // linkleri ana ve açılır menü olarak ayırıyoruz
+  const mainNavLinks = [
     { text: "Home", path: "/" },
     { text: "Shop", path: "/shop" },
     { text: "About", path: "/about" },
-    { text: "Blog", path: "/blog" },
+    { text: "Team", path: "/team" },
     { text: "Contact", path: "/contact" },
-    { text: "Pages", path: "/pages" },
   ];
+
+  const dropdownLinks = [
+    { text: "Blog", path: "/blog" },
+    { text: "Stats", path: "/stats" },
+    { text: "Testimonials", path: "/testimonials" },
+    { text: "Pricing", path: "/pricing" },
+  ];
+
+  // mobil menü için tüm linkleri birleştirdim
+  const allNavLinks = [...mainNavLinks, ...dropdownLinks];
 
   return (
     <header className="shadow-md sticky top-0 bg-white z-50">
@@ -35,20 +47,39 @@ const Header = () => {
         <div>
           <span>Follow Us and get a chance to win 80% off</span>
         </div>
-
         <div className="flex items-center space-x-4">
           <span className="font-bold">Follow Us :</span>
           <div className="flex items-center space-x-3">
-            <a href="#" className="hover:text-sky-400 transition-colors">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-sky-400 transition-colors"
+            >
               <Instagram size={16} />
             </a>
-            <a href="#" className="hover:text-sky-400 transition-colors">
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-sky-400 transition-colors"
+            >
               <Youtube size={16} />
             </a>
-            <a href="#" className="hover:text-sky-400 transition-colors">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-sky-400 transition-colors"
+            >
               <Facebook size={16} />
             </a>
-            <a href="#" className="hover:text-sky-400 transition-colors">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-sky-400 transition-colors"
+            >
               <Twitter size={16} />
             </a>
           </div>
@@ -58,14 +89,13 @@ const Header = () => {
       {/* Ana Header */}
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-[#252B42]">
             ELFCTN
           </Link>
 
-          {/* Navigasyon Linkleri (Masaüstü) */}
+          {/* navlink (Masaüstü)*/}
           <nav className="hidden md:flex items-center space-x-6 text-[#737373] font-medium">
-            {navLinks.map((link) => (
+            {mainNavLinks.map((link) => (
               <NavLink
                 key={link.text}
                 to={link.path}
@@ -76,9 +106,50 @@ const Header = () => {
                 {link.text}
               </NavLink>
             ))}
+
+            {/* açılır meenü ekledim */}
+            <Popover className="relative">
+              {({ open }) => (
+                <>
+                  <Popover.Button className="flex items-center focus:outline-none hover:text-[#252B42]">
+                    <span>Other</span>
+                    <ChevronDown
+                      size={16}
+                      className={`ml-1 transition-transform ${
+                        open ? "rotate-180" : ""
+                      }`}
+                    />
+                  </Popover.Button>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <Popover.Panel className="absolute z-10 w-32 mt-3 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                      <div className="py-1">
+                        {dropdownLinks.map((link) => (
+                          <NavLink
+                            key={link.text}
+                            to={link.path}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            activeClassName="bg-gray-100 font-bold"
+                          >
+                            {link.text}
+                          </NavLink>
+                        ))}
+                      </div>
+                    </Popover.Panel>
+                  </Transition>
+                </>
+              )}
+            </Popover>
           </nav>
 
-          {/* Sağ Taraftaki İkonlar (Masaüstü) */}
+          {/* Sağ Taraftaki İkonlar */}
           <div className="hidden md:flex items-center space-x-6 text-[#23A6F0]">
             <Link to="/login" className="flex items-center gap-1">
               <User size={20} />
@@ -109,14 +180,14 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white py-4 px-6 space-y-4">
           <nav className="flex flex-col space-y-4 text-center text-lg text-[#737373]">
-            {navLinks.map((link) => (
+            {allNavLinks.map((link) => (
               <NavLink
                 key={link.text}
                 to={link.path}
                 className="hover:text-[#252B42]"
                 activeClassName="text-[#252B42]"
                 exact={link.path === "/"}
-                onClick={() => setIsMobileMenuOpen(false)} // Linke tıklayınca menüyü kapat
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.text}
               </NavLink>
