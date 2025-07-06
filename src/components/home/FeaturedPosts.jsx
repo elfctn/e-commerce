@@ -1,31 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-//mock data
-const postsData = [
-  {
-    id: 1,
-    imageUrl: "/grafik1.png",
-    category: "English Department",
-    title: "Graphic Design",
-    description:
-      "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
-    sales: 15,
-    price: 6.48,
-    originalPrice: 16.48,
-  },
-  {
-    id: 2,
-    imageUrl: "/grafik2.png",
-    category: "English Department",
-    title: "Graphic Design",
-    description:
-      "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
-    sales: 15,
-    price: 6.48,
-    originalPrice: 16.48,
-  },
-];
+import featPost from "../../data/featPost";
 
 const FeaturedPosts = () => {
   return (
@@ -37,7 +12,7 @@ const FeaturedPosts = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
-          {postsData.map((post) => (
+          {featPost.map((post) => (
             <div
               key={post.id}
               className="bg-white w-[328px] h-[606px] md:max-w-[700px] md:w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col md:flex-row"
@@ -80,9 +55,11 @@ const FeaturedPosts = () => {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-[#BDBDBD] font-bold line-through">
-                      ${post.originalPrice.toFixed(2)}
-                    </span>
+                    {post.originalPrice !== undefined && (
+                      <span className="text-sm text-[#BDBDBD] font-bold line-through">
+                        ${post.originalPrice.toFixed(2)}
+                      </span>
+                    )}
                     <span className="text-sm text-[#23856D] font-bold">
                       ${post.price.toFixed(2)}
                     </span>

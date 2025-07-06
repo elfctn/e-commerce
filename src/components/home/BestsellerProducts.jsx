@@ -1,91 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "../ProductCard";
-
-//mock data
-const mockProducts = [
-  {
-    id: 1,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product1.png",
-  },
-  {
-    id: 2,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product2.png",
-  },
-  {
-    id: 3,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product3.png",
-  },
-  {
-    id: 4,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product4.png",
-  },
-  {
-    id: 5,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product5.png",
-  },
-  {
-    id: 6,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product6.png",
-  },
-  {
-    id: 7,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product7.png",
-  },
-  {
-    id: 8,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product8.png",
-  },
-  {
-    id: 9,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product9.png",
-  },
-  {
-    id: 10,
-    name: "Graphic Design",
-    category: "English Department",
-    price: 6.48,
-    originalPrice: 16.48,
-    imageUrl: "/product10.png",
-  },
-];
+import { shopProducts } from "../../data/shopProducts";
 
 const BestsellerProducts = () => {
+  const [visibleCount, setVisibleCount] = useState(5);
+  const totalProducts = shopProducts.length;
+
+  const visibleProducts = shopProducts.slice(0, visibleCount);
+
+  const handleLoadMore = () => {
+    setVisibleCount(totalProducts);
+  };
+
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -100,16 +26,21 @@ const BestsellerProducts = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {mockProducts.map((product) => (
+          {visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        <div className="flex justify-center mt-12">
-          <button className="border-2 border-[#23A6F0] text-[#23A6F0] font-bold py-3 px-10 rounded hover:bg-[#23A6F0] hover:text-white transition-colors">
-            LOAD MORE PRODUCTS
-          </button>
-        </div>
+        {visibleCount < totalProducts && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={handleLoadMore}
+              className="border-2 border-[#23A6F0] text-[#23A6F0] font-bold py-3 px-10 rounded hover:bg-[#23A6F0] hover:text-white transition-colors"
+            >
+              LOAD MORE PRODUCTS
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

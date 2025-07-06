@@ -1,50 +1,6 @@
+import React from "react";
 import TeamMemberCard from "./TeamMemberCard";
-
-// bizim 6 kişilik team
-const teamMembers = [
-  {
-    id: 1,
-    name: " Elif Cetin",
-    title: " Full Stack Developer ",
-    imageUrl: "/elf.png",
-    socials: { facebook: "#", instagram: "#", twitter: "#" },
-  },
-  {
-    id: 2,
-    name: "Yalcın Kaya",
-    title: "Project Manager",
-    imageUrl: "/ylcn.png",
-    socials: { facebook: "#", instagram: "#", twitter: "#" },
-  },
-  {
-    id: 3,
-    name: "Emre Sahiner",
-    title: "Frontend Instructor",
-    imageUrl: "/emr.png",
-    socials: { facebook: "#", instagram: "#", twitter: "#" },
-  },
-  {
-    id: 4,
-    name: "Enis Gayretli",
-    title: "Backend Instructor",
-    imageUrl: "/ens.png",
-    socials: { facebook: "#", instagram: "#", twitter: "#" },
-  },
-  {
-    id: 5,
-    name: "Ceren Ayder",
-    title: "Career Coach ",
-    imageUrl: "/crn.png",
-    socials: { facebook: "#", instagram: "#", twitter: "#" },
-  },
-  {
-    id: 6,
-    name: "Inci Bayram",
-    title: "Education Coach",
-    imageUrl: "/inc.png",
-    socials: { facebook: "#", instagram: "#", twitter: "#" },
-  },
-];
+import { teamMembers } from "../../data/team";
 
 const TeamMembersSection = () => {
   return (
