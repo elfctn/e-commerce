@@ -2,7 +2,7 @@ export const teamMembers = [
   {
     id: 1,
     name: "Elif Cetin",
-    title: "Full Stack Developer",
+    title: "Full Stack Engineer",
     imageUrl: "/elf.png",
     socials: { facebook: "#", instagram: "#", twitter: "#" },
   },
