@@ -11,6 +11,7 @@ import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import StatsPage from "./pages/StatsPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/testimonials">
             <TestimonialsPage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
           </Route>
         </Switch>
       </main>
