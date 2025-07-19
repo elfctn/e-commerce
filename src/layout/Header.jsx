@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Popover, Transition } from "@headlessui/react";
 import {
   ShoppingCart,
@@ -12,9 +13,11 @@ import {
   Facebook,
   Twitter,
   ChevronDown,
+  LogOut,
 } from "lucide-react";
 import DesktopDropdown from "../layout/DesktopDropdown";
 import MobileDropdown from "../layout/MobileDropdown";
+import { logout } from "../store/actions/clientActions";
 
 const navItems = [
   { text: "Home", path: "/" },
@@ -36,6 +39,22 @@ const navItems = [
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  // Redux state'inden kullanıcı bilgilerini al
+  const user = useSelector((state) => state.client.user);
+  const dispatch = useDispatch();
+
+  // Gravatar URL'i oluştur
+  const getGravatarUrl = (email) => {
+    const hash = email ? email.toLowerCase().trim() : "";
+    return `https://www.gravatar.com/avatar/${hash}?d=mp&s=40`;
+  };
+
+  // Çıkış yap
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(logout());
+  };
 
   return (
     <header className="shadow-md sticky top-0 bg-white z-50">
@@ -114,9 +133,38 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-6 text-[#23A6F0]">
-            <Link to="/signup" className="flex items-center gap-1">
-              <User size={20} /> <span className="font-bold">Sign Up</span>
-            </Link>
+            {user ? (
+              // Kullanıcı giriş yapmışsa profil göster
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <img
+                    src={getGravatarUrl(user.email)}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="font-bold text-sm">{user.name}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-1 hover:text-red-600 transition-colors"
+                >
+                  <LogOut size={16} />
+                  <span className="text-sm">Çıkış</span>
+                </button>
+              </div>
+            ) : (
+              // Kullanıcı giriş yapmamışsa login/signup göster
+              <>
+                <Link to="/login" className="flex items-center gap-1">
+                  <User size={20} />
+                  <span className="font-bold">Login</span>
+                </Link>
+                <Link to="/signup" className="flex items-center gap-1">
+                  <User size={20} />
+                  <span className="font-bold">Sign Up</span>
+                </Link>
+              </>
+            )}
             <button className="hover:text-blue-700">
               <Search size={20} />
             </button>
@@ -163,10 +211,38 @@ const Header = () => {
             )}
           </nav>
           <div className="border-t pt-4 mt-4 flex flex-col items-center space-y-4 text-[#23A6F0]">
-            <Link to="/signup" className="flex items-center gap-2 text-xl">
-              <User size={24} />
-              <span className="font-bold">Sign Up</span>
-            </Link>
+            {user ? (
+              // Kullanıcı giriş yapmışsa profil göster
+              <div className="flex flex-col items-center space-y-4">
+                <div className="flex items-center space-x-2">
+                  <img
+                    src={getGravatarUrl(user.email)}
+                    alt={user.name}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <span className="font-bold text-lg">{user.name}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors"
+                >
+                  <LogOut size={20} />
+                  <span>Çıkış</span>
+                </button>
+              </div>
+            ) : (
+              // Kullanıcı giriş yapmamışsa login/signup göster
+              <>
+                <Link to="/login" className="flex items-center gap-2 text-xl">
+                  <User size={24} />
+                  <span className="font-bold">Login</span>
+                </Link>
+                <Link to="/signup" className="flex items-center gap-2 text-xl">
+                  <User size={24} />
+                  <span className="font-bold">Sign Up</span>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

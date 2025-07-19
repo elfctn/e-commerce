@@ -13,6 +13,7 @@ import StatsPage from "./pages/StatsPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import AboutPage from "./pages/AboutPage";
 import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -55,6 +56,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUpPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
           </Route>
         </Switch>
       </main>

@@ -6,6 +6,11 @@ import {
 } from "../reducers/clientReducer";
 import api from "../../services/api";
 
+// Login Action Type
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGOUT = "LOGOUT";
+
 // Action Creators - Redux'ta state değişikliklerini tetikleyen fonksiyonlar
 export const setUser = (user) => ({
   type: SET_USER, // Hangi işlemi yapacağımızı belirt
@@ -43,6 +48,45 @@ export const fetchRoles = () => {
       dispatch(setRoles(response.data));
     } catch (error) {
       console.error("Error fetching roles:", error);
+    }
+  };
+};
+
+// Login Action Creators
+export const loginSuccess = (userData) => ({
+  type: LOGIN_SUCCESS,
+  payload: userData,
+});
+
+export const loginFailure = (error) => ({
+  type: LOGIN_FAILURE,
+  payload: error,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
+});
+
+// Thunk Action Creator - Login
+export const loginUser = (email, password, rememberMe = false) => {
+  return async (dispatch) => {
+    try {
+      // API'ye login isteği gönder
+      const response = await api.post("/login", { email, password });
+
+      // Token'ı localStorage'a kaydet (eğer remember me seçiliyse)
+      if (rememberMe) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      // Kullanıcı bilgilerini store'a kaydet
+      dispatch(loginSuccess(response.data));
+
+      return { success: true };
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "Giriş başarısız";
+      dispatch(loginFailure(errorMessage));
+      return { success: false, error: errorMessage };
     }
   };
 };

@@ -1,6 +1,6 @@
 // Redux store ana dosyası - tüm reducerları birleştirir ve store oluşturur
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk"; // Asenkron işlemler için middleware
+import { thunk } from "redux-thunk"; // Asenkron işlemler için middleware
 import logger from "redux-logger"; // Console'da state değişimlerini görmek için
 import clientReducer from "./reducers/clientReducer";
 import productReducer from "./reducers/productReducer";

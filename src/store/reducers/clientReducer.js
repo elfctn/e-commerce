@@ -3,6 +3,9 @@ export const SET_USER = "SET_USER"; // Kullanıcı bilgilerini güncelle
 export const SET_ROLES = "SET_ROLES"; // Rolleri güncelle
 export const SET_THEME = "SET_THEME"; // Temayı güncelle
 export const SET_LANGUAGE = "SET_LANGUAGE"; // Dili güncelle
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS"; // Başarılı giriş
+export const LOGIN_FAILURE = "LOGIN_FAILURE"; // Başarısız giriş
+export const LOGOUT = "LOGOUT"; // Çıkış
 
 // Initial State - Başlangıç durumu
 const initialState = {
@@ -43,6 +46,28 @@ const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         language: action.payload,
+      };
+
+    case LOGIN_SUCCESS:
+      // Başarılı giriş - kullanıcı bilgilerini kaydet
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case LOGIN_FAILURE:
+      // Başarısız giriş - hata mesajını kaydet
+      return {
+        ...state,
+        loginError: action.payload,
+      };
+
+    case LOGOUT:
+      // Çıkış - kullanıcı bilgilerini temizle
+      return {
+        ...state,
+        user: null,
+        loginError: null,
       };
 
     default:
