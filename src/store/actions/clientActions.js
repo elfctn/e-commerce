@@ -4,7 +4,7 @@ import {
   SET_THEME,
   SET_LANGUAGE,
 } from "../reducers/clientReducer";
-import api from "../../services/api";
+import api, { setAuthToken } from "../../services/api";
 
 // Login Action Type
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -63,9 +63,14 @@ export const loginFailure = (error) => ({
   payload: error,
 });
 
-export const logout = () => ({
-  type: LOGOUT,
-});
+export const logout = () => {
+  // Token'ı temizle
+  setAuthToken(null);
+
+  return {
+    type: LOGOUT,
+  };
+};
 
 // Thunk Action Creator - Login
 export const loginUser = (email, password, rememberMe = false) => {
@@ -74,10 +79,8 @@ export const loginUser = (email, password, rememberMe = false) => {
       // API'ye login isteği gönder
       const response = await api.post("/login", { email, password });
 
-      // Token'ı localStorage'a kaydet (eğer remember me seçiliyse)
-      if (rememberMe) {
-        localStorage.setItem("token", response.data.token);
-      }
+      // Token'ı header'a ve localStorage'a kaydet
+      setAuthToken(response.data.token);
 
       // Kullanıcı bilgilerini store'a kaydet
       dispatch(loginSuccess(response.data));
@@ -87,6 +90,39 @@ export const loginUser = (email, password, rememberMe = false) => {
       const errorMessage = error.response?.data?.message || "Giriş başarısız";
       dispatch(loginFailure(errorMessage));
       return { success: false, error: errorMessage };
+    }
+  };
+};
+
+// Thunk Action Creator - Auto Login (Token ile)
+export const autoLogin = () => {
+  return async (dispatch) => {
+    try {
+      // localStorage'dan token'ı al
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        return { success: false, error: "Token bulunamadı" };
+      }
+
+      // Token'ı header'a ekle
+      setAuthToken(token);
+
+      // Token'ı doğrula
+      const response = await api.get("/verify");
+
+      // Yeni token'ı güncelle
+      setAuthToken(response.data.token);
+
+      // Kullanıcı bilgilerini store'a kaydet
+      dispatch(loginSuccess(response.data));
+
+      return { success: true };
+    } catch (error) {
+      // Token geçersizse temizle
+      setAuthToken(null);
+      dispatch(logout());
+      return { success: false, error: "Token geçersiz" };
     }
   };
 };

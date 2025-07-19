@@ -1,4 +1,7 @@
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { autoLogin } from "./store/actions/clientActions";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HomePage from "./pages/HomePage";
@@ -16,6 +19,13 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 
 function App() {
+  const dispatch = useDispatch();
+
+  // Uygulama başladığında auto login'i tetikle
+  useEffect(() => {
+    dispatch(autoLogin());
+  }, [dispatch]);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

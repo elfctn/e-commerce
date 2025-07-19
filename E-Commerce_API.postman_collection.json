@@ -91,6 +91,98 @@
         "description": "Admin hesabı oluşturur"
       },
       "response": []
+    },
+    {
+      "name": "Login - Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"customer@commerce.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/login",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["login"]
+        },
+        "description": "Müşteri hesabı ile giriş yapar"
+      },
+      "response": []
+    },
+    {
+      "name": "Login - Store",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"store@commerce.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/login",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["login"]
+        },
+        "description": "Mağaza hesabı ile giriş yapar"
+      },
+      "response": []
+    },
+    {
+      "name": "Login - Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@commerce.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/login",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["login"]
+        },
+        "description": "Admin hesabı ile giriş yapar"
+      },
+      "response": []
+    },
+    {
+      "name": "Verify Token",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{token}}"
+          }
+        ],
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/verify",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["verify"]
+        },
+        "description": "Token'ı doğrular ve kullanıcı bilgilerini döner"
+      },
+      "response": []
     }
   ]
 }

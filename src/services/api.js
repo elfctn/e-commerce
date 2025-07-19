@@ -7,4 +7,22 @@ const api = axios.create({
   },
 });
 
+// Token'ı localStorage'dan al ve header'a ekle
+const setAuthToken = (token) => {
+  if (token) {
+    api.defaults.headers.common["Authorization"] = token;
+    localStorage.setItem("token", token);
+  } else {
+    delete api.defaults.headers.common["Authorization"];
+    localStorage.removeItem("token");
+  }
+};
+
+// Sayfa yüklendiğinde localStorage'dan token'ı al
+const token = localStorage.getItem("token");
+if (token) {
+  setAuthToken(token);
+}
+
+export { setAuthToken };
 export default api;
