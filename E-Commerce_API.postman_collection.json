@@ -1,0 +1,96 @@
+{
+  "info": {
+    "name": "E-Commerce API",
+    "description": "E-Commerce projesi için API endpoint'leri",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Roles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/roles",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["roles"]
+        },
+        "description": "Kullanılabilir rolleri getirir"
+      },
+      "response": []
+    },
+    {
+      "name": "Sign Up - Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Customer\",\n  \"email\": \"customer@example.com\",\n  \"password\": \"Test123!\",\n  \"role_id\": 3\n}"
+        },
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/signup",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["signup"]
+        },
+        "description": "Müşteri hesabı oluşturur"
+      },
+      "response": []
+    },
+    {
+      "name": "Sign Up - Store",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Store Owner\",\n  \"email\": \"store@example.com\",\n  \"password\": \"Test123!\",\n  \"role_id\": 2,\n  \"store\": {\n    \"name\": \"Test Store\",\n    \"phone\": \"+905551234567\",\n    \"tax_no\": \"T1234V123456\",\n    \"bank_account\": \"TR123456789012345678901234\"\n  }\n}"
+        },
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/signup",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["signup"]
+        },
+        "description": "Mağaza hesabı oluşturur"
+      },
+      "response": []
+    },
+    {
+      "name": "Sign Up - Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Admin\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"Test123!\",\n  \"role_id\": 1\n}"
+        },
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/signup",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["signup"]
+        },
+        "description": "Admin hesabı oluşturur"
+      },
+      "response": []
+    }
+  ]
+}

@@ -114,9 +114,8 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-6 text-[#23A6F0]">
-            <Link to="/login" className="flex items-center gap-1">
-              <User size={20} />{" "}
-              <span className="font-bold">Login / Register</span>
+            <Link to="/signup" className="flex items-center gap-1">
+              <User size={20} /> <span className="font-bold">Sign Up</span>
             </Link>
             <button className="hover:text-blue-700">
               <Search size={20} />
@@ -164,9 +163,9 @@ const Header = () => {
             )}
           </nav>
           <div className="border-t pt-4 mt-4 flex flex-col items-center space-y-4 text-[#23A6F0]">
-            <Link to="/login" className="flex items-center gap-2 text-xl">
+            <Link to="/signup" className="flex items-center gap-2 text-xl">
               <User size={24} />
-              <span className="font-bold">Login / Register</span>
+              <span className="font-bold">Sign Up</span>
             </Link>
           </div>
         </div>

@@ -12,6 +12,7 @@ import BlogDetailPage from "./pages/BlogDetailPage";
 import StatsPage from "./pages/StatsPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import AboutPage from "./pages/AboutPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
           </Route>
           <Route path="/about">
             <AboutPage />
+          </Route>
+          <Route path="/signup">
+            <SignUpPage />
           </Route>
         </Switch>
       </main>
