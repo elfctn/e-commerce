@@ -1,14 +1,21 @@
 import React from "react";
-import { products } from "../../data/products.js";
+import { shopProducts } from "../../data/shopProducts.js";
 
-const FilterBar = () => {
+const FilterBar = ({
+  onSortChange,
+  onFilterClick,
+  onFilterInputChange,
+  sortValue,
+  filterValue,
+  totalProducts,
+}) => {
   return (
     <div className="bg-[#FAFAFA] py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
           <div className="md:mb-0">
             <p className="text-sm font-bold text-[#737373]">
-              Showing all {products.length} results
+              Showing all {totalProducts || shopProducts.length} results
             </p>
           </div>
 
@@ -28,12 +35,28 @@ const FilterBar = () => {
             </div>
 
             <div className="flex items-center space-x-2">
+              {/* Filter Input */}
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={filterValue || ""}
+                onChange={(e) =>
+                  onFilterInputChange && onFilterInputChange(e.target.value)
+                }
+                className="bg-white border border-[#DDDDDD] rounded px-4 py-2 text-sm text-[#737373] focus:outline-none focus:border-[#23A6F0]"
+              />
+
               <div className="relative">
-                <select className="appearance-none cursor-pointer bg-white border border-[#DDDDDD] rounded px-4 py-2 pr-8 text-sm text-[#737373] focus:outline-none">
-                  <option>Popularity</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Newest</option>
+                <select
+                  value={sortValue || ""}
+                  onChange={(e) => onSortChange && onSortChange(e.target.value)}
+                  className="appearance-none cursor-pointer bg-white border border-[#DDDDDD] rounded px-4 py-2 pr-8 text-sm text-[#737373] focus:outline-none"
+                >
+                  <option value="">Sort by</option>
+                  <option value="price:asc">Price: Low to High</option>
+                  <option value="price:desc">Price: High to Low</option>
+                  <option value="name:asc">Name: A to Z</option>
+                  <option value="name:desc">Name: Z to A</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#737373]">
                   <svg
@@ -46,7 +69,10 @@ const FilterBar = () => {
                 </div>
               </div>
 
-              <button className="bg-[#23A6F0] text-white font-bold px-6 py-2 rounded text-sm cursor-pointer hover:bg-blue-600 transition-colors">
+              <button
+                onClick={() => onFilterClick && onFilterClick()}
+                className="bg-[#23A6F0] text-white font-bold px-6 py-2 rounded text-sm cursor-pointer hover:bg-blue-600 transition-colors"
+              >
                 Filter
               </button>
             </div>

@@ -25,16 +25,18 @@ const StarRating = ({ rating }) => {
 };
 
 const ProductInfo = ({ product }) => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  // shopProducts'tan gelen ürünlerde colors alanı yok, varsayılan renkler kullan
+  const defaultColors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
+  const [selectedColor, setSelectedColor] = useState(defaultColors[0]);
 
   return (
     <div className="p-4">
       <h4 className="text-xl text-gray-800">{product.name}</h4>
 
       <div className="flex items-center my-4">
-        <StarRating rating={product.rating} />
+        <StarRating rating={product.rating || 4} />
         <span className="ml-3 text-sm text-gray-500">
-          {product.reviews} Reviews
+          {product.reviews || 10} Reviews
         </span>
       </div>
 
@@ -44,16 +46,19 @@ const ProductInfo = ({ product }) => {
         </h3>
         <p className="text-sm text-gray-500 mt-2">
           Availability:{" "}
-          <span className="text-blue-500">{product.availability}</span>
+          <span className="text-blue-500">
+            {product.availability || "In Stock"}
+          </span>
         </p>
       </div>
 
       <p className="text-sm text-gray-600 my-6 pb-6 border-b border-gray-200">
-        {product.description}
+        {product.description ||
+          "High quality product with excellent design and comfort."}
       </p>
 
       <div className="flex items-center space-x-2 mb-8">
-        {product.colors.map((color) => (
+        {defaultColors.map((color) => (
           <button
             key={color}
             onClick={() => setSelectedColor(color)}

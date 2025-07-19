@@ -215,6 +215,38 @@
       "response": []
     },
     {
+      "name": "Get Products with Query Parameters",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/products?category=2&filter=siyah&sort=price:desc",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["products"],
+          "query": [
+            {
+              "key": "category",
+              "value": "2",
+              "description": "Kategori ID'si (1: Men, 2: Women, 3: Outerwear) - Frontend'de gender kullanılıyor: man, woman, unisex"
+            },
+            {
+              "key": "filter",
+              "value": "siyah",
+              "description": "Ürün adında arama yapılacak metin"
+            },
+            {
+              "key": "sort",
+              "value": "price:desc",
+              "description": "Sıralama seçenekleri: price:asc, price:desc, name:asc, name:desc"
+            }
+          ]
+        },
+        "description": "Query parametreleri ile ürünleri getirir. Örnek: category=2&filter=siyah&sort=price:desc"
+      },
+      "response": []
+    },
+    {
       "name": "Frontend Routes Info",
       "request": {
         "method": "GET",
@@ -225,7 +257,7 @@
           "host": ["frontend", "routes"],
           "path": ["info"]
         },
-        "description": "Frontend route bilgileri:\n- /shop - Tüm ürünler\n- /shop/category/1 - Men's Clothing\n- /shop/category/2 - Women's Clothing\n- /shop/category/3 - Outerwear"
+        "description": "Frontend route bilgileri:\n- /shop - Tüm ürünler\n- /shop/man - Erkek ürünleri (Men's Clothing)\n- /shop/woman - Kadın ürünleri (Women's Clothing)\n- /shop/unisex - Unisex ürünleri (Outerwear)\n- /shop/man/hoodedjacket - Erkek ürünü detayı\n- /shop/woman/knitsweater - Kadın ürünü detayı\n\nFilter ve Sort özellikleri:\n- Filter Input: Ürün adında arama\n- Sort Dropdown: price:asc, price:desc, name:asc, name:desc\n- Filter Button: Tüm filtreleri uygular"
       },
       "response": []
     }

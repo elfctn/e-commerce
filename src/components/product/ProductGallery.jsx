@@ -1,7 +1,9 @@
 import React from "react";
-const ProductGallery = ({ images, productName }) => {
+const ProductGallery = ({ images, productName, product }) => {
+  // shopProducts'tan gelen ürünlerde imageUrl alanı var
   const mainImage =
-    images && images.length > 0 ? images[0] : "/placeholder.png";
+    product?.imageUrl ||
+    (images && images.length > 0 ? images[0] : "/placeholder.png");
 
   return (
     <div className="flex flex-col items-center">

@@ -14,38 +14,39 @@ const ShopPage = () => {
   // Sayfa durumu ve ürün filtreleme için state'ler
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProducts, setFilteredProducts] = useState(shopProducts);
+  const [sortValue, setSortValue] = useState("");
+  const [filterValue, setFilterValue] = useState("");
 
   // URL parametrelerini al
-  // categoryId: 1 2 3
-  // 1: Men's Clothing, 2: Women's Clothing, 3: Outerwear
-  const { categoryId } = useParams();
+  // gender: man, woman
+  const { gender } = useParams();
 
   // URL parametrelerine göre ürünleri filtrele
-  // Kategori ID'sine göre ürünleri filtreliyoruz
-  // Men's Clothing Women's Clothing Outerwear kategorileri
+  // Gender'e göre ürünleri filtreliyoruz
+  // man: Men's Clothing, woman: Women's Clothing, unisex: Outerwear
   useEffect(() => {
-    if (categoryId) {
+    if (gender) {
       let filtered = [];
 
-      // Kategori ID'sine göre filtreleme
-      switch (categoryId) {
-        case "1": // Men's Clothing kategorisi
+      // Gender'e göre filtreleme
+      switch (gender) {
+        case "man": // Erkek ürünleri
           filtered = shopProducts.filter(
             (product) => product.category === "Men's Clothing"
           );
           break;
-        case "2": // Women's Clothing kategorisi
+        case "woman": // Kadın ürünleri
           filtered = shopProducts.filter(
             (product) => product.category === "Women's Clothing"
           );
           break;
-        case "3": // Outerwear kategorisi
+        case "unisex": // Unisex ürünleri (Outerwear)
           filtered = shopProducts.filter(
             (product) => product.category === "Outerwear"
           );
           break;
         default:
-          // Kategori bulunamazsa tüm ürünleri göster
+          // Gender bulunamazsa tüm ürünleri göster
           filtered = shopProducts;
       }
 
@@ -56,7 +57,74 @@ const ShopPage = () => {
       // URL parametresi yoksa tüm ürünleri göster
       setFilteredProducts(shopProducts);
     }
-  }, [categoryId]);
+  }, [gender]);
+
+  // Sıralama değiştirme fonksiyonu
+  const handleSortChange = (value) => {
+    setSortValue(value);
+  };
+
+  // Filter input değiştirme fonksiyonu
+  const handleFilterInputChange = (value) => {
+    setFilterValue(value);
+  };
+
+  // Filter butonuna basma fonksiyonu
+  const handleFilterClick = () => {
+    let filtered = [...shopProducts];
+
+    // Önce kategori filtreleme
+    if (gender) {
+      switch (gender) {
+        case "man":
+          filtered = filtered.filter(
+            (product) => product.category === "Men's Clothing"
+          );
+          break;
+        case "woman":
+          filtered = filtered.filter(
+            (product) => product.category === "Women's Clothing"
+          );
+          break;
+        case "unisex":
+          filtered = filtered.filter(
+            (product) => product.category === "Outerwear"
+          );
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Sonra arama filtreleme
+    if (filterValue) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(filterValue.toLowerCase())
+      );
+    }
+
+    // Son olarak sıralama
+    if (sortValue) {
+      switch (sortValue) {
+        case "price:asc":
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case "price:desc":
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case "name:asc":
+          filtered.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case "name:desc":
+          filtered.sort((a, b) => b.name.localeCompare(a.name));
+          break;
+        default:
+          break;
+      }
+    }
+
+    setFilteredProducts(filtered);
+  };
 
   // Sayfalama hesaplamaları
   // Filtrelenmiş ürünlere göre toplam sayfa sayısı
@@ -84,7 +152,14 @@ const ShopPage = () => {
         <ShopHeader />
       </div>
       <ShopCategoryCards />
-      <FilterBar />
+      <FilterBar
+        onSortChange={handleSortChange}
+        onFilterClick={handleFilterClick}
+        onFilterInputChange={handleFilterInputChange}
+        sortValue={sortValue}
+        filterValue={filterValue}
+        totalProducts={filteredProducts.length}
+      />
       <ProductGrid products={currentProducts} />
       <Pagination
         currentPage={currentPage}

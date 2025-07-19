@@ -40,10 +40,18 @@ function App() {
           <Route exact path="/shop">
             <ShopPage />
           </Route>
-          {/* Kategori bazlı shop sayfası */}
-          {/* categoryId: 1 2 3 */}
-          {/* 1: Men's Clothing, 2: Women's Clothing, 3: Outerwear */}
-          <Route path="/shop/category/:categoryId">
+          {/* Ürün detay sayfası - ÖNCE GELMELİ */}
+          {/* /shop/man/hoodedjacket - Erkek ürünü detayı */}
+          {/* /shop/woman/knitsweater - Kadın ürünü detayı */}
+          <Route path="/shop/:gender/:productName">
+            <ProductDetailPage />
+          </Route>
+
+          {/* Gender bazlı shop sayfası - SONRA GELMELİ */}
+          {/* /shop/man - Erkek ürünleri */}
+          {/* /shop/woman - Kadın ürünleri */}
+          {/* /shop/unisex - Unisex ürünleri (Outerwear) */}
+          <Route path="/shop/:gender">
             <ShopPage />
           </Route>
           <Route path="/product/:id">

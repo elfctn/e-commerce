@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { products } from "../data/products.js";
+import { shopProducts } from "../data/shopProducts.js";
 import ProductBreadcrumb from "../components/product/ProductBreadcrumb";
 import ProductGallery from "../components/product/ProductGallery";
 import ProductInfo from "../components/product/ProductInfo";
@@ -8,15 +9,39 @@ import ProductTabs from "../components/product/ProductTabs";
 import BestsellerProducts from "../components/home/BestsellerProducts"; // Bestseller bölümünü import et
 
 const ProductDetailPage = () => {
-  const { id } = useParams();
+  const { id, gender, productName } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const foundProduct = products.find((p) => p.id === parseInt(id));
+    let foundProduct = null;
+
+    console.log("URL Params:", { id, gender, productName });
+
+    // Yeni URL yapısı: /shop/man/hoodedjacket
+    if (gender && productName) {
+      console.log("Yeni URL yapısı kullanılıyor");
+      console.log("Aranan productName:", productName);
+      console.log(
+        "Mevcut ürünler:",
+        shopProducts.map((p) => p.name.toLowerCase().replace(/\s+/g, ""))
+      );
+
+      foundProduct = shopProducts.find(
+        (p) => p.name.toLowerCase().replace(/\s+/g, "") === productName
+      );
+
+      console.log("Bulunan ürün:", foundProduct);
+    }
+    // Eski URL yapısı: /product/1
+    else if (id) {
+      console.log("Eski URL yapısı kullanılıyor");
+      foundProduct = products.find((p) => p.id === parseInt(id));
+    }
+
     setProduct(foundProduct);
     setLoading(false);
-  }, [id]);
+  }, [id, gender, productName]);
 
   if (loading) {
     return <div className="text-center py-20">Yükleniyor...</div>;
@@ -37,6 +62,7 @@ const ProductDetailPage = () => {
               <ProductGallery
                 images={product.images}
                 productName={product.name}
+                product={product}
               />
             </div>
             <div className="md:w-1/2">

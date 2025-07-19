@@ -51,15 +51,15 @@ const Header = () => {
       children: [
         {
           text: "Men",
-          path: "/shop/category/1",
+          path: "/shop/man",
         },
         {
           text: "Women",
-          path: "/shop/category/2",
+          path: "/shop/woman",
         },
         {
           text: "Outerwear",
-          path: "/shop/category/3",
+          path: "/shop/unisex",
         },
       ],
     },

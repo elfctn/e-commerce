@@ -1,11 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, gender }) => {
   const colors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
 
+  // URL oluştur
+  const getProductUrl = () => {
+    if (gender) {
+      // Gender varsa: /shop/man/hoodedjacket
+      const productName = product.name.toLowerCase().replace(/\s+/g, "");
+      return `/shop/${gender}/${productName}`;
+    } else {
+      // Gender yoksa eski format: /product/1
+      return `/product/${product.id}`;
+    }
+  };
+
   return (
-    <Link to={`/product/${product.id}`} className="group block">
+    <Link to={getProductUrl()} className="group block">
       <div className="flex flex-col text-center">
         <div className="mb-4 relative overflow-hidden flex justify-center items-center">
           <img

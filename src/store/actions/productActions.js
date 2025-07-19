@@ -57,20 +57,32 @@ export const fetchCategories = () => {
 };
 
 // Thunk Action Creator - Fetch Products
-export const fetchProducts = () => {
+export const fetchProducts = (params = {}) => {
   return async (dispatch, getState) => {
-    // Ürünler zaten yüklenmiş mi kontrol et
-    const { products } = getState().product;
-    if (products.length > 0) {
-      return; // Ürünler zaten yüklenmiş, tekrar yükleme
-    }
-
     try {
       // Fetch state'i FETCHING olarak ayarla
       dispatch(setFetchState("FETCHING"));
 
+      // Query parametrelerini oluştur
+      const queryParams = new URLSearchParams();
+
+      if (params.category) {
+        queryParams.append("category", params.category);
+      }
+
+      if (params.sort) {
+        queryParams.append("sort", params.sort);
+      }
+
+      if (params.filter) {
+        queryParams.append("filter", params.filter);
+      }
+
       // API'den ürünler getir
-      const response = await api.get("/products");
+      const url = `/products${
+        queryParams.toString() ? `?${queryParams.toString()}` : ""
+      }`;
+      const response = await api.get(url);
 
       // Ürünleri ve toplam sayıyı store'a kaydet
       dispatch(setProducts(response.data.products));
