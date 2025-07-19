@@ -17,7 +17,7 @@ const FeaturedProducts = () => {
               Top Product Of the Week
             </h3>
             <Link
-              to="/shop"
+              to="/shop/man"
               className="text-white font-bold border-b-2 border-white pb-1 hover:text-gray-200 hover:border-gray-200 transition-colors"
             >
               EXPLORE ITEMS
@@ -39,7 +39,7 @@ const FeaturedProducts = () => {
                 Top Product Of the Week
               </h3>
               <Link
-                to="/shop"
+                to="/shop/woman"
                 className="text-white font-bold border-b-2 border-white pb-1 hover:text-gray-200 hover:border-gray-200 transition-colors"
               >
                 EXPLORE ITEMS
@@ -59,7 +59,7 @@ const FeaturedProducts = () => {
                 Top Product Of the Week
               </h3>
               <Link
-                to="/shop"
+                to="/shop/unisex"
                 className="text-white font-bold border-b-2 border-white pb-1 hover:text-gray-200 hover:border-gray-200 transition-colors"
               >
                 EXPLORE ITEMS

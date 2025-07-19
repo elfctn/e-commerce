@@ -27,7 +27,17 @@ const BestsellerProducts = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {visibleProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              gender={
+                product.category === "Men's Clothing"
+                  ? "man"
+                  : product.category === "Women's Clothing"
+                  ? "woman"
+                  : "unisex"
+              }
+            />
           ))}
         </div>
 
