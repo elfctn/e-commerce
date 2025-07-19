@@ -14,6 +14,7 @@ import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import StatsPage from "./pages/StatsPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
+
 import AboutPage from "./pages/AboutPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -69,6 +70,7 @@ function App() {
           <Route path="/testimonials">
             <TestimonialsPage />
           </Route>
+
           <Route path="/about">
             <AboutPage />
           </Route>

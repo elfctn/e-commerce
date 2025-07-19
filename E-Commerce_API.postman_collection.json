@@ -200,6 +200,21 @@
       "response": []
     },
     {
+      "name": "Get Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://workintech-fe-ecommerce.onrender.com/products",
+          "protocol": "https",
+          "host": ["workintech-fe-ecommerce", "onrender", "com"],
+          "path": ["products"]
+        },
+        "description": "Tüm ürünleri getirir. Response: { total: 185, products: [ProductObject1, ProductObject2, ...] }"
+      },
+      "response": []
+    },
+    {
       "name": "Frontend Routes Info",
       "request": {
         "method": "GET",
