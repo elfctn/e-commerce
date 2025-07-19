@@ -34,7 +34,15 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/shop">
+          {/* Shop sayfası route'ları */}
+          {/* Ana shop sayfası tüm ürünleri gösterir */}
+          <Route exact path="/shop">
+            <ShopPage />
+          </Route>
+          {/* Kategori bazlı shop sayfası */}
+          {/* categoryId: 1 2 3 */}
+          {/* 1: Men's Clothing, 2: Women's Clothing, 3: Outerwear */}
+          <Route path="/shop/category/:categoryId">
             <ShopPage />
           </Route>
           <Route path="/product/:id">

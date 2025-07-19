@@ -18,23 +18,7 @@ import {
 import DesktopDropdown from "../layout/DesktopDropdown";
 import MobileDropdown from "../layout/MobileDropdown";
 import { logout } from "../store/actions/clientActions";
-
-const navItems = [
-  { text: "Home", path: "/" },
-  { text: "Shop", path: "/shop" },
-  { text: "About", path: "/about" },
-  { text: "Team", path: "/team" },
-  { text: "Contact", path: "/contact" },
-  {
-    text: "Other",
-    children: [
-      { text: "Blog", path: "/blog" },
-      { text: "Stats", path: "/stats" },
-      { text: "Testimonials", path: "/testimonials" },
-      { text: "Pricing", path: "/pricing" },
-    ],
-  },
-];
+import { fetchCategories } from "../store/actions/productActions";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -42,7 +26,63 @@ const Header = () => {
 
   // Redux state'inden kullanıcı bilgilerini al
   const user = useSelector((state) => state.client.user);
+  const { categories } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+
+  // Kategorileri yükle
+  React.useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  // Gender kodunu Türkçe'ye çevir
+  const getGenderText = (gender) => {
+    return gender === "k" ? "kadin" : "erkek";
+  };
+
+  // Mevcut ürün kategorilerini kullan
+  // Bu kategoriler static data olarak tanımlanmış
+  // API'den gelen kategoriler yerine mevcut ürün kategorilerini kullanıyoruz
+  const existingCategories = [
+    { id: 1, title: "Men's Clothing", gender: "erkek" },
+    { id: 2, title: "Women's Clothing", gender: "kadin" },
+    { id: 3, title: "Outerwear", gender: "unisex" },
+  ];
+
+  // Nav items'ı mevcut kategorilerle oluştur
+  // Shop dropdown'ında Men Women Outerwear kategorileri
+  // Her kategori kendi sayfasına yönlendiriyor
+  const navItems = [
+    { text: "Home", path: "/" },
+    {
+      text: "Shop",
+      children: [
+        {
+          text: "Men",
+          path: "/shop/category/1",
+        },
+        {
+          text: "Women",
+          path: "/shop/category/2",
+        },
+        {
+          text: "Outerwear",
+          path: "/shop/category/3",
+        },
+      ],
+    },
+    { text: "About", path: "/about" },
+    { text: "Team", path: "/team" },
+    { text: "Contact", path: "/contact" },
+    {
+      text: "Other",
+      children: [
+        { text: "Blog", path: "/blog" },
+        { text: "Stats", path: "/stats" },
+        { text: "Testimonials", path: "/testimonials" },
+        { text: "Pricing", path: "/pricing" },
+      ],
+    },
+  ];
 
   // Gravatar URL'i oluştur
   const getGravatarUrl = (email) => {

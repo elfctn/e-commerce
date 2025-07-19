@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchCategories } from "../store/actions/productActions";
 import HeroSection from "../components/home/HeroSection";
 import BrandLogos from "../components/common/BrandLogos";
 import FeaturedProducts from "../components/home/FeaturedProducts";
@@ -8,6 +10,13 @@ import Services from "../components/home/Services";
 import FeaturedPosts from "../components/home/FeaturedPosts";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  // Kategorileri yükle
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   return (
     <div>
       <HeroSection />
