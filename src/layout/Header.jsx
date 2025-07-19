@@ -18,7 +18,6 @@ import {
 import DesktopDropdown from "../layout/DesktopDropdown";
 import MobileDropdown from "../layout/MobileDropdown";
 import { logout } from "../store/actions/clientActions";
-import { fetchCategories } from "../store/actions/productActions";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,13 +25,7 @@ const Header = () => {
 
   // Redux state'inden kullanıcı bilgilerini al
   const user = useSelector((state) => state.client.user);
-  const { categories } = useSelector((state) => state.product);
   const dispatch = useDispatch();
-
-  // Kategorileri yükle
-  React.useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
 
   // Gender kodunu Türkçe'ye çevir
   const getGenderText = (gender) => {
