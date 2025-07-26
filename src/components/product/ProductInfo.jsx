@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Heart, ShoppingCart, Eye } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/actions/cartActions";
 
 // yıldızları render etmek için yardımcı component ekledim
 const StarRating = ({ rating }) => {
@@ -25,9 +27,11 @@ const StarRating = ({ rating }) => {
 };
 
 const ProductInfo = ({ product }) => {
-  // shopProducts'tan gelen ürünlerde colors alanı yok, varsayılan renkler kullan
+  const dispatch = useDispatch();
+  // products'tan gelen ürünlerde colors alanı yoksa, varsayılan renkler kullan
   const defaultColors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
   const [selectedColor, setSelectedColor] = useState(defaultColors[0]);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="p-4">
@@ -73,9 +77,37 @@ const ProductInfo = ({ product }) => {
         ))}
       </div>
 
+      {/* quantity selector */}
+      <div className="flex items-center space-x-4 mb-6">
+        <span className="text-sm font-medium text-gray-700">Quantity:</span>
+        <div className="flex items-center border border-gray-300 rounded">
+          <button
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+          >
+            -
+          </button>
+          <span className="px-4 py-1 text-center min-w-[3rem]">{quantity}</span>
+          <button
+            onClick={() => setQuantity(quantity + 1)}
+            className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
       <div className="flex items-center space-x-3">
-        <button className="bg-blue-500 text-white font-bold py-3 px-6 rounded hover:bg-blue-600 transition-colors">
-          Select Options
+        <button
+          onClick={() => {
+            // seçilen miktar kadar ürün ekle
+            for (let i = 0; i < quantity; i++) {
+              dispatch(addToCart(product));
+            }
+          }}
+          className="bg-[#23A6F0] text-white font-bold py-3 px-6 rounded hover:bg-blue-600 transition-colors"
+        >
+          Add to Cart
         </button>
         <button className="p-3 border border-gray-200 rounded-full hover:bg-gray-100 transition-colors">
           <Heart size={20} />

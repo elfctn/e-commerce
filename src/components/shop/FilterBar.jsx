@@ -1,5 +1,5 @@
 import React from "react";
-import { shopProducts } from "../../data/shopProducts.js";
+import { products } from "../../data/products.js";
 
 const FilterBar = ({
   onSortChange,
@@ -15,7 +15,7 @@ const FilterBar = ({
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-center md:justify-between">
           <div className="md:mb-0">
             <p className="text-sm font-bold text-[#737373]">
-              Showing all {totalProducts || shopProducts.length} results
+              Showing all {totalProducts || products.length} results
             </p>
           </div>
 
@@ -34,7 +34,7 @@ const FilterBar = ({
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
               {/* Filter Input */}
               <input
                 type="text"
@@ -43,14 +43,14 @@ const FilterBar = ({
                 onChange={(e) =>
                   onFilterInputChange && onFilterInputChange(e.target.value)
                 }
-                className="bg-white border border-[#DDDDDD] rounded px-4 py-2 text-sm text-[#737373] focus:outline-none focus:border-[#23A6F0]"
+                className="w-full sm:w-auto bg-white border border-[#DDDDDD] rounded px-4 py-2 text-sm text-[#737373] focus:outline-none focus:border-[#23A6F0]"
               />
 
-              <div className="relative">
+              <div className="relative w-full sm:w-auto">
                 <select
                   value={sortValue || ""}
                   onChange={(e) => onSortChange && onSortChange(e.target.value)}
-                  className="appearance-none cursor-pointer bg-white border border-[#DDDDDD] rounded px-4 py-2 pr-8 text-sm text-[#737373] focus:outline-none"
+                  className="w-full sm:w-auto appearance-none cursor-pointer bg-white border border-[#DDDDDD] rounded px-4 py-2 pr-8 text-sm text-[#737373] focus:outline-none"
                 >
                   <option value="">Sort by</option>
                   <option value="price:asc">Price: Low to High</option>
@@ -71,7 +71,7 @@ const FilterBar = ({
 
               <button
                 onClick={() => onFilterClick && onFilterClick()}
-                className="bg-[#23A6F0] text-white font-bold px-6 py-2 rounded text-sm cursor-pointer hover:bg-blue-600 transition-colors"
+                className="w-full sm:w-auto bg-[#23A6F0] text-white font-bold px-6 py-2 rounded text-sm cursor-pointer hover:bg-blue-600 transition-colors"
               >
                 Filter
               </button>

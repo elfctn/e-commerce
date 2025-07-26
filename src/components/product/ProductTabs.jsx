@@ -26,9 +26,22 @@ const ProductTabs = ({ product }) => {
               Additional Information
             </h3>
             <ul className="list-disc pl-5 text-gray-600">
-              <li>Colors: {product.colors.join(", ")}</li>
-              <li>Category: {product.category}</li>
-              <li>Stock: {product.stock} units</li>
+              <li>
+                Colors:{" "}
+                {product.colors && product.colors.length > 0
+                  ? product.colors.join(", ")
+                  : "Not available"}
+              </li>
+              <li>
+                Category:{" "}
+                {product.category ? product.category : "Not available"}
+              </li>
+              <li>
+                Stock:{" "}
+                {typeof product.stock === "number"
+                  ? product.stock + " units"
+                  : "Not available"}
+              </li>
             </ul>
           </div>
         );
@@ -54,7 +67,11 @@ const ProductTabs = ({ product }) => {
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           <button
-            onClick={() => setActiveTab("description")}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveTab("description");
+            }}
             className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
               activeTab === "description"
                 ? "border-blue-500 text-blue-600"
@@ -64,7 +81,11 @@ const ProductTabs = ({ product }) => {
             Description
           </button>
           <button
-            onClick={() => setActiveTab("additional")}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveTab("additional");
+            }}
             className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
               activeTab === "additional"
                 ? "border-blue-500 text-blue-600"
@@ -74,7 +95,11 @@ const ProductTabs = ({ product }) => {
             Additional Information
           </button>
           <button
-            onClick={() => setActiveTab("reviews")}
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveTab("reviews");
+            }}
             className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
               activeTab === "reviews"
                 ? "border-blue-500 text-blue-600"

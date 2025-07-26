@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { products } from "../data/products.js";
-import { shopProducts } from "../data/shopProducts.js";
 import ProductBreadcrumb from "../components/product/ProductBreadcrumb";
 import ProductGallery from "../components/product/ProductGallery";
 import ProductInfo from "../components/product/ProductInfo";
@@ -29,12 +28,10 @@ const ProductDetailPage = () => {
     // yeni url yapısı desteği
     if (productId) {
       // t16 url ile geldiyse id ile bul
-      foundProduct = shopProducts.find(
-        (p) => String(p.id) === String(productId)
-      );
+      foundProduct = products.find((p) => String(p.id) === String(productId));
     } else if (gender && productName) {
       // eski url yapısı
-      foundProduct = shopProducts.find(
+      foundProduct = products.find(
         (p) => p.name.toLowerCase().replace(/\s+/g, "") === productName
       );
     } else if (id) {
@@ -77,7 +74,7 @@ const ProductDetailPage = () => {
           onClick={() => history.goBack()}
           className="mb-4 px-4 py-2 bg-[#23A6F0] text-white rounded hover:bg-blue-600 transition-colors"
         >
-          geri dön
+          Back
         </button>
         {/* Üst Kısım: Galeri ve Bilgiler */}
         <div className="bg-white p-6 rounded-lg shadow-sm">

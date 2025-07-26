@@ -1,6 +1,6 @@
 import React from "react";
 const ProductGallery = ({ images, productName, product }) => {
-  // shopProducts'tan gelen ürünlerde imageUrl alanı var
+  // products'tan gelen ürünlerde imageUrl alanı var
   const mainImage =
     product?.imageUrl ||
     (images && images.length > 0 ? images[0] : "/placeholder.png");

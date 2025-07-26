@@ -74,12 +74,15 @@ export const products = [
     description:
       "A comfortable jacket for daily use and sports. Its lightweight structure and ergonomic design provide comfort for outdoor sports in winter.",
     images: ["/urun5.png"],
+    originalPrice: 599.99,
+    discount: 20,
     category: "Outerwear",
     rating: 4,
     stock: 12,
     reviews: 45,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun5.png",
   },
   {
     id: 6,
@@ -88,12 +91,15 @@ export const products = [
     description:
       "Adapts to any outfit with its flexible structure and modern design.",
     images: ["/urun6.png"],
+    originalPrice: 249.0,
+    discount: 20,
     category: "Outerwear",
     rating: 3,
     stock: 20,
     reviews: 15,
     availability: "In Stock",
     colors: ["blue", "green", "orange", "navy"],
+    imageUrl: "/urun6.png",
   },
   {
     id: 7,

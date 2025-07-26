@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import DesktopDropdown from "../layout/DesktopDropdown";
 import MobileDropdown from "../layout/MobileDropdown";
+import CartDropdown from "../components/cart/CartDropdown";
 import { logout } from "../store/actions/clientActions";
 
 const Header = () => {
@@ -201,13 +202,7 @@ const Header = () => {
             <button className="hover:text-blue-700">
               <Search size={20} />
             </button>
-            <Link
-              to="/cart"
-              className="flex items-center gap-1 hover:text-blue-700"
-            >
-              <ShoppingCart size={20} />
-              <span></span>
-            </Link>
+            <CartDropdown />
           </div>
 
           <div className="md:hidden">
@@ -244,6 +239,11 @@ const Header = () => {
             )}
           </nav>
           <div className="border-t pt-4 mt-4 flex flex-col items-center space-y-4 text-[#23A6F0]">
+            {/* mobil sepet dropdown */}
+            <div className="w-full flex justify-center">
+              <CartDropdown />
+            </div>
+
             {user ? (
               // Kullanıcı giriş yapmışsa profil göster
               <div className="flex flex-col items-center space-y-4">

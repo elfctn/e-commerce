@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/actions/cartActions";
 
 const ProductCard = ({ product, gender }) => {
+  const dispatch = useDispatch();
   const colors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
 
   // URL oluştur
@@ -40,6 +43,13 @@ const ProductCard = ({ product, gender }) => {
   const useT16Url = true; // toggle için değiştirilebilir
   const url = useT16Url ? getProductDetailUrl() : getProductUrl();
 
+  // sepete ekle
+  const handleAddToCart = (e) => {
+    e.preventDefault(); // link'e gitmeyi engelle
+    e.stopPropagation(); // event bubbling'i engelle
+    dispatch(addToCart(product));
+  };
+
   return (
     <Link to={url} className="group block cursor-pointer">
       <div className="flex flex-col text-center">
@@ -47,7 +57,7 @@ const ProductCard = ({ product, gender }) => {
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-[239px] h-[300px] object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90"
+            className="w-full md:w-[239px] h-[200px] md:h-[300px] object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90"
           />
           {/* hover efekti için overlay */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-[#23A6F0] transition-opacity"></div>
@@ -61,9 +71,11 @@ const ProductCard = ({ product, gender }) => {
         </p>
 
         <div className="flex justify-center items-center gap-2">
-          <span className="text-base font-bold text-[#BDBDBD] line-through">
-            ${product.originalPrice.toFixed(2)}
-          </span>
+          {product.originalPrice && (
+            <span className="text-base font-bold text-[#BDBDBD] line-through">
+              ${product.originalPrice.toFixed(2)}
+            </span>
+          )}
           <span className="text-base font-bold text-[#23856D]">
             ${product.price.toFixed(2)}
           </span>
@@ -78,6 +90,14 @@ const ProductCard = ({ product, gender }) => {
             ></span>
           ))}
         </div>
+
+        {/* sepete ekle butonu */}
+        <button
+          onClick={handleAddToCart}
+          className="mt-4 w-full bg-[#23A6F0] text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors font-medium"
+        >
+          Add to Cart
+        </button>
       </div>
     </Link>
   );

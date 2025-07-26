@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import ProductCard from "../ProductCard";
-import { shopProducts } from "../../data/shopProducts";
+import { products } from "../../data/products";
 
 const BestsellerProducts = () => {
   const [visibleCount, setVisibleCount] = useState(5);
-  const totalProducts = shopProducts.length;
+  const totalProducts = products.length;
 
-  const visibleProducts = shopProducts.slice(0, visibleCount);
+  const visibleProducts = products.slice(0, visibleCount);
 
   const handleLoadMore = () => {
     setVisibleCount(totalProducts);
