@@ -100,9 +100,17 @@ const ProductInfo = ({ product }) => {
       <div className="flex items-center space-x-3">
         <button
           onClick={() => {
+            console.log(
+              "Add to Cart clicked:",
+              product,
+              "Quantity:",
+              quantity,
+              "Color:",
+              selectedColor
+            );
             // seçilen miktar kadar ürün ekle
             for (let i = 0; i < quantity; i++) {
-              dispatch(addToCart(product));
+              dispatch(addToCart(product, selectedColor));
             }
           }}
           className="bg-[#23A6F0] text-white font-bold py-3 px-6 rounded hover:bg-blue-600 transition-colors"

@@ -18,6 +18,7 @@ import TestimonialsPage from "./pages/TestimonialsPage";
 import AboutPage from "./pages/AboutPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          {/* Cart sayfası */}
+          <Route path="/cart">
+            <CartPage />
           </Route>
           {/* Shop sayfası route'ları */}
           {/* Ana shop sayfası tüm ürünleri gösterir */}

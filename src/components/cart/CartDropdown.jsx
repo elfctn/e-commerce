@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import {
   removeFromCart,
@@ -9,8 +10,14 @@ import {
 
 const CartDropdown = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { cart, totalItems, totalPrice } = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
+
+  // debug için console.log
+  console.log("CartDropdown - cart:", cart);
+  console.log("CartDropdown - totalItems:", totalItems);
+  console.log("CartDropdown - totalPrice:", totalPrice);
 
   // dropdown'ı aç/kapat
   const toggleDropdown = () => {
@@ -18,22 +25,30 @@ const CartDropdown = () => {
   };
 
   // ürünü sepetten kaldır
-  const handleRemove = (productId) => {
-    dispatch(removeFromCart(productId));
+  const handleRemove = (productKey) => {
+    dispatch(removeFromCart(productKey));
   };
 
   // miktar güncelle
-  const handleQuantityChange = (productId, newCount) => {
+  const handleQuantityChange = (productKey, newCount) => {
     if (newCount > 0) {
-      dispatch(updateQuantity(productId, newCount));
+      // productKey'den productId ve selectedColor'ı çıkar
+      const [productId, selectedColor] = productKey.split("-");
+      dispatch(updateQuantity(parseInt(productId), selectedColor, newCount));
     } else {
-      dispatch(removeFromCart(productId));
+      dispatch(removeFromCart(productKey));
     }
   };
 
   // seçili durumu değiştir
-  const handleToggleChecked = (productId) => {
-    dispatch(toggleChecked(productId));
+  const handleToggleChecked = (productKey) => {
+    dispatch(toggleChecked(productKey));
+  };
+
+  // checkout butonuna tıklandığında cart sayfasına yönlendir
+  const handleCheckout = () => {
+    setIsOpen(false); // dropdown'ı kapat
+    history.push("/cart"); // cart sayfasına yönlendir
   };
 
   return (
@@ -67,78 +82,80 @@ const CartDropdown = () => {
               <>
                 {/* ürün listesi */}
                 <div className="max-h-64 overflow-y-auto space-y-3">
-                  {cart.map((item) => (
-                    <div
-                      key={item.product.id}
-                      className="flex items-center space-x-3 p-2 border-b border-gray-100"
-                    >
-                      {/* ürün resmi */}
-                      <img
-                        src={item.product.imageUrl}
-                        alt={item.product.name}
-                        className="w-12 h-12 object-cover rounded"
-                      />
-
-                      {/* ürün bilgileri */}
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-medium text-[#252B42] truncate">
-                          {item.product.name}
-                        </h4>
-                        <p className="text-sm text-[#23856D] font-bold">
-                          ${item.product.price.toFixed(2)}
-                        </p>
-                      </div>
-
-                      {/* miktar kontrolleri */}
-                      <div className="flex items-center space-x-2">
-                        <button
-                          onClick={() =>
-                            handleQuantityChange(
-                              item.product.id,
-                              item.count - 1
-                            )
-                          }
-                          className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300"
-                        >
-                          -
-                        </button>
-                        <span className="text-sm font-medium w-8 text-center">
-                          {item.count}
-                        </span>
-                        <button
-                          onClick={() =>
-                            handleQuantityChange(
-                              item.product.id,
-                              item.count + 1
-                            )
-                          }
-                          className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300"
-                        >
-                          +
-                        </button>
-                      </div>
-
-                      {/* kaldır butonu */}
-                      <button
-                        onClick={() => handleRemove(item.product.id)}
-                        className="text-red-500 hover:text-red-700"
+                  {cart.map((item) => {
+                    const productKey = `${item.product.id}-${item.selectedColor}`;
+                    return (
+                      <div
+                        key={productKey}
+                        className="flex items-center space-x-3 p-2 border-b border-gray-100"
                       >
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                        {/* ürün resmi */}
+                        <img
+                          src={item.product.imageUrl}
+                          alt={item.product.name}
+                          className="w-12 h-12 object-cover rounded"
+                        />
+
+                        {/* ürün bilgileri */}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-medium text-[#252B42] truncate">
+                            {item.product.name}
+                          </h4>
+                          <p className="text-xs text-gray-500">
+                            Color:{" "}
+                            <span style={{ color: item.selectedColor }}>●</span>{" "}
+                            {item.selectedColor}
+                          </p>
+                          <p className="text-sm text-[#23856D] font-bold">
+                            ${item.product.price.toFixed(2)}
+                          </p>
+                        </div>
+
+                        {/* miktar kontrolleri */}
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(productKey, item.count - 1)
+                            }
+                            className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300"
+                          >
+                            -
+                          </button>
+                          <span className="text-sm font-medium w-8 text-center">
+                            {item.count}
+                          </span>
+                          <button
+                            onClick={() =>
+                              handleQuantityChange(productKey, item.count + 1)
+                            }
+                            className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300"
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        {/* kaldır butonu */}
+                        <button
+                          onClick={() => handleRemove(productKey)}
+                          className="text-red-500 hover:text-red-700"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  ))}
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 {/* toplam */}
@@ -151,7 +168,10 @@ const CartDropdown = () => {
                   </div>
 
                   {/* checkout butonu */}
-                  <button className="w-full bg-[#23A6F0] text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
+                  <button
+                    onClick={handleCheckout}
+                    className="w-full bg-[#23A6F0] text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+                  >
                     Checkout
                   </button>
                 </div>

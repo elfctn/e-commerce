@@ -203,6 +203,12 @@ const Header = () => {
               <Search size={20} />
             </button>
             <CartDropdown />
+            <Link
+              to="/cart"
+              className="flex items-center gap-1 hover:text-blue-700"
+            >
+              <span className="font-bold text-sm">Cart</span>
+            </Link>
           </div>
 
           <div className="md:hidden">

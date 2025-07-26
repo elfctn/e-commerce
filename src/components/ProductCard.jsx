@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/actions/cartActions";
@@ -6,6 +6,7 @@ import { addToCart } from "../store/actions/cartActions";
 const ProductCard = ({ product, gender }) => {
   const dispatch = useDispatch();
   const colors = ["#23A6F0", "#23856D", "#E77C40", "#252B42"];
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   // URL oluştur
   const getProductUrl = () => {
@@ -47,7 +48,14 @@ const ProductCard = ({ product, gender }) => {
   const handleAddToCart = (e) => {
     e.preventDefault(); // link'e gitmeyi engelle
     e.stopPropagation(); // event bubbling'i engelle
-    dispatch(addToCart(product));
+    console.log(
+      "ProductCard - Adding to cart:",
+      product,
+      "Color:",
+      selectedColor
+    );
+    dispatch(addToCart(product, selectedColor));
+    console.log("ProductCard - Dispatched addToCart");
   };
 
   return (
@@ -81,13 +89,24 @@ const ProductCard = ({ product, gender }) => {
           </span>
         </div>
 
+        {/* renk seçimi */}
         <div className="flex justify-center mt-2 space-x-1.5">
           {colors.map((color) => (
-            <span
+            <button
               key={color}
-              className="w-4 h-4 rounded-full"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedColor(color);
+              }}
+              className={`w-4 h-4 rounded-full focus:outline-none ${
+                selectedColor === color
+                  ? "ring-2 ring-offset-2 ring-gray-400"
+                  : ""
+              }`}
               style={{ backgroundColor: color }}
-            ></span>
+              aria-label={`Select color ${color}`}
+            />
           ))}
         </div>
 

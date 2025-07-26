@@ -7,27 +7,27 @@ import {
 } from "../reducers/cartReducer";
 
 // ürünü sepete ekle
-export const addToCart = (product) => ({
+export const addToCart = (product, selectedColor) => ({
   type: ADD_TO_CART,
-  payload: product,
+  payload: { product, selectedColor },
 });
 
 // ürünü sepetten kaldır
-export const removeFromCart = (productId) => ({
+export const removeFromCart = (productKey) => ({
   type: REMOVE_FROM_CART,
-  payload: productId,
+  payload: productKey,
 });
 
 // ürün miktarını güncelle
-export const updateQuantity = (productId, count) => ({
+export const updateQuantity = (productId, selectedColor, count) => ({
   type: UPDATE_QUANTITY,
-  payload: { productId, count },
+  payload: { productId, selectedColor, count },
 });
 
 // ürünün seçili durumunu değiştir
-export const toggleChecked = (productId) => ({
+export const toggleChecked = (productKey) => ({
   type: TOGGLE_CHECKED,
-  payload: productId,
+  payload: productKey,
 });
 
 // sepeti temizle
