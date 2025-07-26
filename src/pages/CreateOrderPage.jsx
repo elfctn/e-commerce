@@ -499,7 +499,10 @@ const CreateOrderPage = () => {
           <button
             onClick={() => {
               if (selectedShippingAddress && selectedBillingAddress) {
-                history.push("/create-order/step2");
+                history.push("/create-order/step2", {
+                  selectedShippingAddress: selectedShippingAddress,
+                  selectedBillingAddress: selectedBillingAddress,
+                });
               }
             }}
             className={`px-8 py-4 rounded-lg font-semibold text-lg transition-colors ${

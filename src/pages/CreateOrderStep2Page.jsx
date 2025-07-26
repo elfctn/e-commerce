@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { CreditCard, Plus, Edit, Trash, Check, ArrowLeft } from "lucide-react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import CreditCardForm from "../components/order/CreditCardForm";
 
 const CreateOrderStep2Page = () => {
@@ -12,6 +12,11 @@ const CreateOrderStep2Page = () => {
   const [editingCard, setEditingCard] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
   const history = useHistory();
+  const location = useLocation();
+
+  // location state'den adres bilgilerini al
+  const { selectedShippingAddress, selectedBillingAddress } =
+    location.state || {};
 
   // test için mock data (backend hazır olduğunda kaldır)
   const mockCards = [
@@ -224,6 +229,29 @@ const CreateOrderStep2Page = () => {
     // fetchCards();
   }, []);
 
+  // adres bilgileri yoksa geri yönlendir
+  if (!selectedShippingAddress || !selectedBillingAddress) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Check className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Missing Address Information
+          </h2>
+          <p className="text-gray-600 mb-4">
+            Please complete address selection first.
+          </p>
+          <button
+            onClick={() => history.push("/create-order")}
+            className="px-6 py-3 bg-[#23856D] text-white rounded-lg hover:bg-[#1a6b5a] transition-colors"
+          >
+            Go Back to Address Selection
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -400,10 +428,12 @@ const CreateOrderStep2Page = () => {
           <button
             onClick={() => {
               if (selectedCard) {
-                console.log("Order completed with card:", selectedCard);
-                alert(
-                  "Order completed successfully! (This would go to review page)"
-                );
+                // adres bilgilerini location state ile geçir
+                history.push("/order-summary", {
+                  selectedShippingAddress: selectedShippingAddress,
+                  selectedBillingAddress: selectedBillingAddress,
+                  selectedCard: selectedCard,
+                });
               }
             }}
             className={`px-8 py-4 rounded-lg font-semibold text-lg transition-colors ${

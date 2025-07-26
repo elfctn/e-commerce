@@ -21,6 +21,8 @@ import LoginPage from "./pages/LoginPage";
 import CartPage from "./pages/CartPage";
 import CreateOrderPage from "./pages/CreateOrderPage";
 import CreateOrderStep2Page from "./pages/CreateOrderStep2Page";
+import OrderSummaryPage from "./pages/OrderSummaryPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
@@ -108,6 +110,10 @@ function App() {
             component={CreateOrderStep2Page}
           />
           <ProtectedRoute path="/create-order" component={CreateOrderPage} />
+
+          {/* Order Pages */}
+          <ProtectedRoute path="/order-summary" component={OrderSummaryPage} />
+          <Route path="/order-success" component={OrderSuccessPage} />
         </Switch>
       </main>
       <Footer />
