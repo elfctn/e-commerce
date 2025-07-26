@@ -16,15 +16,41 @@ const ProductCard = ({ product, gender }) => {
     }
   };
 
+  // t16: yeni url formatı için fonksiyon
+  const getProductDetailUrl = () => {
+    // kategori adını küçük harfli ve tire ile ayır
+    const categoryNameSlug = product.category
+      ? product.category.toLowerCase().replace(/\s+/g, "-")
+      : "";
+    // ürün adını küçük harfli ve tire ile ayır
+    const productNameSlug = product.name
+      ? product.name.toLowerCase().replace(/\s+/g, "-")
+      : "";
+    // yeni url formatı oluştur
+    if (gender && product.category && product.id) {
+      return `/shop/${gender}/${categoryNameSlug}/${
+        product.categoryId || product.category_id || 1
+      }/${productNameSlug}/${product.id}`;
+    }
+    // eski url formatına geri dön
+    return getProductUrl();
+  };
+
+  // url formatı seçimi (toggle ile değiştirilebilir)
+  const useT16Url = true; // toggle için değiştirilebilir
+  const url = useT16Url ? getProductDetailUrl() : getProductUrl();
+
   return (
-    <Link to={getProductUrl()} className="group block">
+    <Link to={url} className="group block cursor-pointer">
       <div className="flex flex-col text-center">
         <div className="mb-4 relative overflow-hidden flex justify-center items-center">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-[239px] h-[300px] object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-[239px] h-[300px] object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90"
           />
+          {/* hover efekti için overlay */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-[#23A6F0] transition-opacity"></div>
         </div>
 
         <h4 className="text-base font-bold text-[#252B42] mb-2">

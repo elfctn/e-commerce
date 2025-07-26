@@ -40,6 +40,12 @@ function App() {
           <Route exact path="/shop">
             <ShopPage />
           </Route>
+          {/* t16: yeni ürün detay sayfası route'u - en üstte olmalı */}
+          {/* /shop/man/clothing/1/gri-regular-astar/322 - t16 formatı */}
+          <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId">
+            <ProductDetailPage />
+          </Route>
+
           {/* Ürün detay sayfası - ÖNCE GELMELİ */}
           {/* /shop/man/hoodedjacket - Erkek ürünü detayı */}
           {/* /shop/woman/knitsweater - Kadın ürünü detayı */}

@@ -4,6 +4,7 @@ import {
   SET_TOTAL,
   SET_FETCH_STATE,
   ADD_PRODUCTS,
+  SET_PRODUCT_DETAIL,
 } from "../reducers/productReducer";
 import api from "../../services/api";
 
@@ -31,6 +32,12 @@ export const setFetchState = (fetchState) => ({
 export const addProducts = (products) => ({
   type: ADD_PRODUCTS,
   payload: products,
+});
+
+// t16: tek ürün detayı için action creator
+export const setProductDetail = (product) => ({
+  type: SET_PRODUCT_DETAIL,
+  payload: product,
 });
 
 // Thunk Action Creator - Fetch Categories
@@ -155,6 +162,29 @@ export const fetchProducts = (params = {}) => {
     } catch (error) {
       console.error("Error fetching products:", error);
       // Fetch state'i FAILED olarak ayarla
+      dispatch(setFetchState("FAILED"));
+    }
+  };
+};
+
+// t16: tek ürün detayını getiren thunk action
+export const fetchProductDetail = (productId) => {
+  return async (dispatch, getState) => {
+    try {
+      // fetch state'i fetching olarak ayarla
+      dispatch(setFetchState("FETCHING"));
+
+      // api'den ürün detayını getir
+      const response = await api.get(`/products/${productId}`);
+
+      // ürün detayını store'a kaydet
+      dispatch(setProductDetail(response.data));
+
+      // fetch state'i fetched olarak ayarla
+      dispatch(setFetchState("FETCHED"));
+    } catch (error) {
+      console.error("Error fetching product detail:", error);
+      // fetch state'i failed olarak ayarla
       dispatch(setFetchState("FAILED"));
     }
   };
