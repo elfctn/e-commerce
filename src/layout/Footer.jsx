@@ -44,7 +44,7 @@ const footerLinkSections = [
 const Footer = () => {
   return (
     <footer className="bg-white pt-16 pb-8">
-      <div className="container mx-auto px-4">
+      <div className="px-8">
         {/* Logo ve Sosyal Medya */}
         <div className="flex justify-between items-center mb-12 border-b border-gray-300 pb-6">
           <h2 className="text-2xl font-bold">ELFCTN</h2>

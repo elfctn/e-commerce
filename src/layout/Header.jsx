@@ -141,81 +141,79 @@ const Header = () => {
       </div>
 
       {/* BAŞLIK */}
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          <Link to="/" className="text-2xl font-bold text-[#252B42]">
-            ELFCTN
-          </Link>
+      <div className="flex justify-between items-center bg-white px-8 py-4">
+        <Link to="/" className="text-2xl font-bold text-[#252B42]">
+          ELFCTN
+        </Link>
 
-          {/* MASAÜSTÜ MENÜ */}
-          <nav className="hidden md:flex items-center space-x-6 text-[#737373] font-medium">
-            {navItems.map((item) =>
-              item.children ? (
-                <DesktopDropdown key={item.text} item={item} />
-              ) : (
-                <NavLink
-                  key={item.text}
-                  to={item.path}
-                  className="hover:text-[#252B42]"
-                  activeClassName="text-[#252B42]"
-                  exact={item.path === "/"}
-                >
-                  {item.text}
-                </NavLink>
-              )
-            )}
-          </nav>
-
-          <div className="hidden md:flex items-center space-x-6 text-[#23A6F0]">
-            {user ? (
-              // Kullanıcı giriş yapmışsa profil göster
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <img
-                    src={getGravatarUrl(user.email)}
-                    alt={user.name}
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <span className="font-bold text-sm">{user.name}</span>
-                </div>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-1 hover:text-red-600 transition-colors"
-                >
-                  <LogOut size={16} />
-                  <span className="text-sm">Çıkış</span>
-                </button>
-              </div>
+        {/* MASAÜSTÜ MENÜ */}
+        <nav className="hidden md:flex items-center space-x-6 text-[#737373] font-medium">
+          {navItems.map((item) =>
+            item.children ? (
+              <DesktopDropdown key={item.text} item={item} />
             ) : (
-              // Kullanıcı giriş yapmamışsa login/signup göster
-              <>
-                <Link to="/login" className="flex items-center gap-1">
-                  <User size={20} />
-                  <span className="font-bold">Login</span>
-                </Link>
-                <Link to="/signup" className="flex items-center gap-1">
-                  <User size={20} />
-                  <span className="font-bold">Sign Up</span>
-                </Link>
-              </>
-            )}
-            <button className="hover:text-blue-700">
-              <Search size={20} />
-            </button>
-            <CartDropdown />
-            <Link
-              to="/cart"
-              className="flex items-center gap-1 hover:text-blue-700"
-            >
-              <span className="font-bold text-sm">Cart</span>
-            </Link>
-          </div>
+              <NavLink
+                key={item.text}
+                to={item.path}
+                className="hover:text-[#252B42]"
+                activeClassName="text-[#252B42]"
+                exact={item.path === "/"}
+              >
+                {item.text}
+              </NavLink>
+            )
+          )}
+        </nav>
 
-          <div className="md:hidden">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+        <div className="hidden md:flex items-center space-x-6 text-[#23A6F0]">
+          {user ? (
+            // Kullanıcı giriş yapmışsa profil göster
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <img
+                  src={getGravatarUrl(user.email)}
+                  alt={user.name}
+                  className="w-8 h-8 rounded-full"
+                />
+                <span className="font-bold text-sm">{user.name}</span>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-1 hover:text-red-600 transition-colors"
+              >
+                <LogOut size={16} />
+                <span className="text-sm">Çıkış</span>
+              </button>
+            </div>
+          ) : (
+            // Kullanıcı giriş yapmamışsa login/signup göster
+            <>
+              <Link to="/login" className="flex items-center gap-1">
+                <User size={20} />
+                <span className="font-bold">Login</span>
+              </Link>
+              <Link to="/signup" className="flex items-center gap-1">
+                <User size={20} />
+                <span className="font-bold">Sign Up</span>
+              </Link>
+            </>
+          )}
+          <button className="hover:text-blue-700">
+            <Search size={20} />
+          </button>
+          <CartDropdown />
+          <Link
+            to="/cart"
+            className="flex items-center gap-1 hover:text-blue-700"
+          >
+            <span className="font-bold text-sm">Cart</span>
+          </Link>
+        </div>
+
+        <div className="md:hidden">
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
       </div>
 
