@@ -220,7 +220,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://workintech-fe-ecommerce.onrender.com/products?category=2&filter=siyah&sort=price:desc",
+          "raw": "https://workintech-fe-ecommerce.onrender.com/products?category=2&filter=siyah&sort=price:desc&limit=25&offset=0",
           "protocol": "https",
           "host": ["workintech-fe-ecommerce", "onrender", "com"],
           "path": ["products"],
@@ -239,10 +239,35 @@
               "key": "sort",
               "value": "price:desc",
               "description": "Sıralama seçenekleri: price:asc, price:desc, name:asc, name:desc"
+            },
+            {
+              "key": "limit",
+              "value": "25",
+              "description": "Sayfa başına ürün sayısı (default: 25)"
+            },
+            {
+              "key": "offset",
+              "value": "0",
+              "description": "Atlanacak ürün sayısı (default: 0) - Pagination için kullanılır"
             }
           ]
         },
-        "description": "Query parametreleri ile ürünleri getirir. Örnek: category=2&filter=siyah&sort=price:desc"
+        "description": "Query parametreleri ile ürünleri getirir. Pagination için limit ve offset kullanılır. Örnek: category=2&filter=siyah&sort=price:desc&limit=25&offset=0"
+      },
+      "response": []
+    },
+    {
+      "name": "Pagination Examples",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "Pagination Examples - Not API",
+          "protocol": "https",
+          "host": ["pagination", "examples"],
+          "path": ["info"]
+        },
+        "description": "Pagination örnekleri:\n\nSayfa 1: products?limit=25&offset=0 (ilk 25 ürün)\nSayfa 2: products?limit=25&offset=25 (25-50 arası ürünler)\nSayfa 3: products?limit=25&offset=50 (50-75 arası ürünler)\n\nFrontend'de iki seçenek:\n1. Pagination: Sayfa numaraları ile gezinme\n2. Infinite Scroll: Sayfa sonuna gelince otomatik yükleme\n\nToggle buton ile seçim yapılabilir."
       },
       "response": []
     },
@@ -257,7 +282,7 @@
           "host": ["frontend", "routes"],
           "path": ["info"]
         },
-        "description": "Frontend route bilgileri:\n- /shop - Tüm ürünler\n- /shop/man - Erkek ürünleri (Men's Clothing)\n- /shop/woman - Kadın ürünleri (Women's Clothing)\n- /shop/unisex - Unisex ürünleri (Outerwear)\n- /shop/man/hoodedjacket - Erkek ürünü detayı\n- /shop/woman/knitsweater - Kadın ürünü detayı\n\nFilter ve Sort özellikleri:\n- Filter Input: Ürün adında arama\n- Sort Dropdown: price:asc, price:desc, name:asc, name:desc\n- Filter Button: Tüm filtreleri uygular"
+        "description": "Frontend route bilgileri:\n- /shop - Tüm ürünler\n- /shop/man - Erkek ürünleri (Men's Clothing)\n- /shop/woman - Kadın ürünleri (Women's Clothing)\n- /shop/unisex - Unisex ürünleri (Outerwear)\n- /shop/man/hoodedjacket - Erkek ürünü detayı\n- /shop/woman/knitsweater - Kadın ürünü detayı\n\nFilter ve Sort özellikleri:\n- Filter Input: Ürün adında arama\n- Sort Dropdown: price:asc, price:desc, name:asc, name:desc\n- Filter Button: Tüm filtreleri uygular\n\nPagination özellikleri:\n- Toggle ile Pagination/Infinite Scroll seçimi\n- API'den limit/offset ile veri çekme\n- Loading spinner'lar"
       },
       "response": []
     }

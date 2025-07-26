@@ -3,6 +3,7 @@ export const SET_CATEGORIES = "SET_CATEGORIES";
 export const SET_PRODUCTS = "SET_PRODUCTS";
 export const SET_TOTAL = "SET_TOTAL";
 export const SET_FETCH_STATE = "SET_FETCH_STATE";
+export const ADD_PRODUCTS = "ADD_PRODUCTS";
 
 // Initial State
 const initialState = {
@@ -37,6 +38,12 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchState: action.payload,
+      };
+
+    case ADD_PRODUCTS:
+      return {
+        ...state,
+        products: [...state.products, ...action.payload],
       };
 
     default:
