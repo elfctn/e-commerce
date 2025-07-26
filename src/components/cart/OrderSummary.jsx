@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const OrderSummary = () => {
   const { cart } = useSelector((state) => state.cart);
+  const history = useHistory();
 
   // Seçili ürünlerin toplam fiyatı
   const selectedItems = cart.filter((item) => item.checked);
@@ -62,6 +64,7 @@ const OrderSummary = () => {
 
       {/* Create Order Button */}
       <button
+        onClick={() => history.push("/create-order")}
         className="w-full mt-6 bg-[#23856D] text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-[#1a6b5a] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={selectedItems.length === 0}
       >

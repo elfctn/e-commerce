@@ -19,6 +19,8 @@ import AboutPage from "./pages/AboutPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import CartPage from "./pages/CartPage";
+import CreateOrderPage from "./pages/CreateOrderPage";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -99,6 +101,8 @@ function App() {
           <Route path="/login">
             <LoginPage />
           </Route>
+          {/* Protected Route - Create Order Page */}
+          <ProtectedRoute path="/create-order" component={CreateOrderPage} />
         </Switch>
       </main>
       <Footer />

@@ -182,7 +182,7 @@ const Header = () => {
                 className="flex items-center gap-1 hover:text-red-600 transition-colors"
               >
                 <LogOut size={16} />
-                <span className="text-sm">Çıkış</span>
+                <span className="text-sm">LogOut</span>
               </button>
             </div>
           ) : (
@@ -264,7 +264,7 @@ const Header = () => {
                   className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors"
                 >
                   <LogOut size={20} />
-                  <span>Çıkış</span>
+                  <span>LogOut</span>
                 </button>
               </div>
             ) : (
