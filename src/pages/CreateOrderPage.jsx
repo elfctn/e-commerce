@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { MapPin, Plus, Edit, Trash, Check } from "lucide-react";
 import AddressForm from "../components/order/AddressForm";
 
 const CreateOrderPage = () => {
   const { user } = useSelector((state) => state.client);
+  const history = useHistory();
   const [addresses, setAddresses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -212,6 +214,7 @@ const CreateOrderPage = () => {
     },
     {
       id: 2,
+      title: "Home",
       name: "Nurcan",
       surname: "Dökümcü",
       phone: "05327004112",
@@ -494,6 +497,11 @@ const CreateOrderPage = () => {
         {/* Devam Et Butonu */}
         <div className="mt-8 text-center">
           <button
+            onClick={() => {
+              if (selectedShippingAddress && selectedBillingAddress) {
+                history.push("/create-order/step2");
+              }
+            }}
             className={`px-8 py-4 rounded-lg font-semibold text-lg transition-colors ${
               selectedShippingAddress && selectedBillingAddress
                 ? "bg-[#23856D] text-white hover:bg-[#1a6b5a]"
