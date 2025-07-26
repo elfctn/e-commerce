@@ -23,6 +23,7 @@ import CreateOrderPage from "./pages/CreateOrderPage";
 import CreateOrderStep2Page from "./pages/CreateOrderStep2Page";
 import OrderSummaryPage from "./pages/OrderSummaryPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import PreviousOrdersPage from "./pages/PreviousOrdersPage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
@@ -114,6 +115,12 @@ function App() {
           {/* Order Pages */}
           <ProtectedRoute path="/order-summary" component={OrderSummaryPage} />
           <Route path="/order-success" component={OrderSuccessPage} />
+
+          {/* Previous Orders Page */}
+          <ProtectedRoute
+            path="/previous-orders"
+            component={PreviousOrdersPage}
+          />
         </Switch>
       </main>
       <Footer />

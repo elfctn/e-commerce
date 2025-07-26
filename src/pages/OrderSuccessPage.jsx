@@ -8,14 +8,7 @@ const OrderSuccessPage = () => {
 
   const { orderNumber, totalAmount } = location.state || {};
 
-  // 5 saniye sonra ana sayfaya yönlendir
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      history.push("/");
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [history]);
+  // auto-redirect kaldırıldı - kullanıcı kendisi gidecek
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-8">
@@ -135,11 +128,9 @@ const OrderSuccessPage = () => {
             </button>
           </div>
 
-          {/* Auto Redirect Notice */}
+          {/* Success Message */}
           <div className="mt-6 text-sm text-gray-500">
-            <p>
-              You will be automatically redirected to the home page in 5 seconds
-            </p>
+            <p>Thank you for your purchase! 🎉</p>
           </div>
         </div>
       </div>

@@ -169,21 +169,46 @@ const Header = () => {
           {user ? (
             // Kullanıcı giriş yapmışsa profil göster
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <img
-                  src={getGravatarUrl(user.email)}
-                  alt={user.name}
-                  className="w-8 h-8 rounded-full"
-                />
-                <span className="font-bold text-sm">{user.name}</span>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-1 hover:text-red-600 transition-colors"
-              >
-                <LogOut size={16} />
-                <span className="text-sm">LogOut</span>
-              </button>
+              {/* user dropdown */}
+              <Popover className="relative">
+                <Popover.Button className="flex items-center space-x-2 hover:text-blue-700 transition-colors focus:outline-none">
+                  <img
+                    src={getGravatarUrl(user.email)}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="font-bold text-sm">{user.name}</span>
+                  <ChevronDown size={16} />
+                </Popover.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Popover.Panel className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                    <div className="py-2">
+                      <Link
+                        to="/previous-orders"
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        <span>Previous Orders</span>
+                      </Link>
+                      <div className="border-t border-gray-100 my-1"></div>
+                      <button
+                        onClick={handleLogout}
+                        className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <LogOut size={16} className="mr-2" />
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  </Popover.Panel>
+                </Transition>
+              </Popover>
             </div>
           ) : (
             // Kullanıcı giriş yapmamışsa login/signup göster
@@ -259,6 +284,13 @@ const Header = () => {
                   />
                   <span className="font-bold text-lg">{user.name}</span>
                 </div>
+                <Link
+                  to="/previous-orders"
+                  className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  <span>Previous Orders</span>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors"

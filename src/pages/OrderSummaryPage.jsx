@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { clearCart } from "../store/actions/cartActions";
+import { addOrder } from "../store/actions/orderActions";
 import {
   MapPin,
   CreditCard,
@@ -48,12 +49,42 @@ const OrderSummaryPage = () => {
       // mock implementasyon (backend hazır olduğunda kaldır)
       await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 saniye bekle
 
+      // yeni sipariş oluştur
+      const newOrder = {
+        id: Date.now(),
+        order_number: `ORD-${Date.now()}`,
+        order_date: new Date().toISOString(),
+        total_amount: grandTotal,
+        status: "Processing",
+        products: selectedItems.map((item) => ({
+          product_id: item.product.id,
+          name: item.product.name,
+          count: item.count,
+          detail: `${
+            item.selectedColor.charAt(0).toUpperCase() +
+            item.selectedColor.slice(1)
+          } - ${item.size || "M"}`,
+          price: item.product.price,
+          imageUrl: item.product.imageUrl,
+        })),
+        shipping_address: selectedShippingAddress,
+        payment_method: {
+          card_no: selectedCard.card_no,
+          name_on_card: selectedCard.name_on_card,
+          expire_month: selectedCard.expire_month,
+          expire_year: selectedCard.expire_year,
+        },
+      };
+
+      // siparişi Redux store'a ekle
+      dispatch(addOrder(newOrder));
+
       // başarılı sipariş sonrası sepeti temizle
       dispatch(clearCart());
 
       // başarı sayfasına yönlendir
       history.push("/order-success", {
-        orderNumber: `ORD-${Date.now()}`,
+        orderNumber: newOrder.order_number,
         totalAmount: grandTotal,
       });
 
